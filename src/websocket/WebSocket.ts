@@ -26,7 +26,7 @@ export default class WebSocketManager extends EventEmitter {
      */
     constructor(isReconnect: boolean, token: string) {
         super();
-        this.debugMode = true;
+        this.debugMode = false;
         this.token = token;
         this.isReconnect = isReconnect;
         this.sequence = 0;
@@ -68,6 +68,12 @@ export default class WebSocketManager extends EventEmitter {
 
                     break;
 
+                case OPCODES.HEARTBEAT_ACK:
+
+                        this.debugMode && console.log('heartbeat_act')
+
+                    break;
+
             }
 
             this.debugMode && console.log(packet);
@@ -76,6 +82,9 @@ export default class WebSocketManager extends EventEmitter {
 
             switch (t) {
 
+                case 'MESSAGE_CREATE':
+                        if (d.content == 'XD') console.log('tak')
+                    break;
                 case 'READY':
                         this.debugMode && console.log('[WS]: Connected to gateway!');
                         this.emit('ready');
@@ -108,12 +117,12 @@ export default class WebSocketManager extends EventEmitter {
      * @param {*} s - S from Discord gateway.
      * @param {*} d - D from Discord gateway.
      */
-    heartbeat (interval: number, s: any, d: any): void {
+    heartbeat (interval: number, s: any, d: any) {
         this.heart = setInterval(() => {
             heartBeat.s = s;
             heartBeat.d = d;
-            this.socket.send(JSON.stringify(heartBeat));
-        })
+            this.socket?.send(JSON.stringify(heartBeat));
+        }, interval);
     }
 
     /**
@@ -123,15 +132,18 @@ export default class WebSocketManager extends EventEmitter {
     identifyClient (token: string) {
         switch (this.isReconnect) {
             case true:
-                    this.socket.send(JSON.stringify({
-                        op: 6, d: {
-                            token, session_id: this.sessionID
+                    this.socket?.send(JSON.stringify({
+                        op: 6,
+                        d: {
+                            token: token,
+                            session_id: this.sessionID
                         }
                     }));
                 break;
+
             case false:
-                    identify.d.token = token;
-                    this.socket.send(JSON.stringify(identify));
+                identify.d.token = token;
+                    this.socket?.send(JSON.stringify(identify));
                 break;
         }
     }
