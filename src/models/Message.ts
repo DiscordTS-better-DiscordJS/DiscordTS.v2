@@ -48,10 +48,13 @@ export class Message {
      * @param {string} content Content of message // embed soon
      * @description Reply to member message // todo nonmention
      */
-    reply (content: string | any) /* embed support when embedes was added */ {
+     reply (content: string | any) /* embed support when embedes was added */ {
         let msg: any = {};
         if (typeof content == 'string') msg = { content };
-        else msg = { embed: content };
+        else {
+            delete content.clear
+            msg = { embeds: [content], content: "" }
+        }
 
         msg.message_reference = {                // wheh channel model was added there channel should be change into channel.id
             message_id: this.id, channel_id: this.channel,
@@ -59,7 +62,6 @@ export class Message {
         }
 
         sendMessage(msg, msg.message_reference.channel_id);
-
     }
 
 }

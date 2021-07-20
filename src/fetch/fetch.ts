@@ -19,6 +19,7 @@ export const FETCH = async (data: FetchInterface): Promise<any> => {
         body: JSON.stringify(data.body)
     });
 
+    console.log(await res.text())
     return await res.json();
 
 }
