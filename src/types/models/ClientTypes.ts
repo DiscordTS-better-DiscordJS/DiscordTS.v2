@@ -1,4 +1,4 @@
 export interface ClientOptions {
-    bot: string
+    bot: boolean
     appID?: string
 }

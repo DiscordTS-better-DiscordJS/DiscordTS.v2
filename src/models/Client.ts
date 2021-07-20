@@ -34,10 +34,8 @@ export class Client extends EventEmitter {
     constructor(options?: ClientOptions) {
         super();
 
-        this.options = options;
+        this.options = { bot: options?.bot || true };
         this.options.appID = options?.appID || '';
-        this.options.bot = options.bot || true;
-
     }
 
     /**

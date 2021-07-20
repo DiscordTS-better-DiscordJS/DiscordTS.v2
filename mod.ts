@@ -1,1 +1,2 @@
-export * from './src/websocket/WebSocket';
+export * from './src/websocket/WebSocket.ts';
+export * from './src/models/Client.ts';
