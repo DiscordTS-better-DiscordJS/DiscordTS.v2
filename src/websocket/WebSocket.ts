@@ -12,7 +12,7 @@ const EVENTS: any = e;
 /**
  * @name WebSocketManager - Class to manage discord ws
  */
-export default class WebSocketManager extends EventEmitter {
+export class WebSocketManager extends EventEmitter {
 
     private readonly debugMode: boolean
     private readonly token: string
@@ -147,8 +147,3 @@ export default class WebSocketManager extends EventEmitter {
     }
 
 }
-
-const client = new WebSocketManager(false, 'NjcxNzk3NjA4NzUwMjUyMDQw.XjCKRw.-6e4D666d8W3wJnFzcGVIMu1s4o');
-client.on('message', (m) => {
-   console.log(m.content)
-});
