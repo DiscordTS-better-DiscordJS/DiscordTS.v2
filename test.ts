@@ -9,7 +9,7 @@ const client = new Client({
 });
 
 client.on('message', (m: Message) => {
-    if (m.content == 'pseudol') {
+    if (/pseudol/gmi.test(m.content)) {
         m.reply('Jest jebany');
     }
 });
