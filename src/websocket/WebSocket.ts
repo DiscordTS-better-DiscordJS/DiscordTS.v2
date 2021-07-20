@@ -1,4 +1,4 @@
-import EventEmitter from 'https://deno.land/std@0.84.0/node/events.ts';
+import { EventEmitter } from 'https://deno.land/x/event@2.0.0/mod.ts';
 import { WebSocketClient, StandardWebSocketClient } from 'https://deno.land/x/websocket@v0.1.2/mod.ts';
 
 import { LINKS } from './links.ts';
@@ -9,10 +9,12 @@ import * as events from '../events/export.ts';
 import { Packet } from '../types/websocket/packet.ts';
 const EVENTS: any = e;
 
+import { Client } from '../models/Client.ts';
+
 /**
  * @name WebSocketManager - Class to manage discord ws
  */
-export class WebSocketManager extends EventEmitter {
+export class WebSocketManager extends EventEmitter<any> {
 
     private readonly debugMode: boolean
     private readonly token: string
@@ -26,8 +28,9 @@ export class WebSocketManager extends EventEmitter {
      * Create WebSocket Manager
      * @param {boolean} isReconnect - Reconnecting to gateway?
      * @param {string} token - Client token.
+     * @param {Client} client - Client
      */
-    constructor(isReconnect: boolean, token: string) {
+    constructor(isReconnect: boolean, token: string, client: Client) {
         super();
         this.debugMode = false;
         this.token = token;
@@ -60,7 +63,7 @@ export class WebSocketManager extends EventEmitter {
 
                         this.socket.on('close', () => {
                             clearInterval(this.heart);
-                            new WebSocketManager(false, this.token);
+                            new WebSocketManager(false, this.token, client);
                         });
 
                         this.socket.on('error', (e: any) => {
@@ -81,7 +84,7 @@ export class WebSocketManager extends EventEmitter {
 
             this.debugMode && console.log(packet);
             this.emit('raw', packet);
-            this.module(EVENTS[t], d).then(() => {})
+            this.module(EVENTS[t], d, client).then(() => {})
 
             switch (t) {
 
@@ -102,9 +105,9 @@ export class WebSocketManager extends EventEmitter {
     }
 
 
-    private async module (name: string, d: any) {
+    private async module (name: string, d: any, client: Client) {
         if (events && (events as any)[name]) {
-            const res = await (events as any)[name](d)
+            const res = await (events as any)[name](d, client)
             this.emit(name, res)
         }
     }

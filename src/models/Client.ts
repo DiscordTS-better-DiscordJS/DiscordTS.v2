@@ -12,16 +12,17 @@ class Options {
 const OPTIONS = new Options();
 
 // imports
-import EventEmitter from 'https://deno.land/std@0.84.0/node/events.ts';
+import { EventEmitter } from 'https://deno.land/x/event@2.0.0/mod.ts'
 import { WebSocketManager } from '../websocket/WebSocket.ts';
 import { ClientOptions } from '../types/models/ClientTypes.ts';
 import { EVENTS } from '../websocket/websocketEvents.ts';
+import { Events } from '../types/eventemitter/Events.ts'
 
 /**
  * Class representing a Client.
  * @extends EventEmitter
  */
-export class Client extends EventEmitter {
+export class Client extends EventEmitter<Events> {
 
     ws!: WebSocketManager
     token!: string
@@ -48,7 +49,7 @@ export class Client extends EventEmitter {
         OPTIONS.isBot = this.options.bot;
         OPTIONS.appID = this.options.appID;
         try {
-            this.ws = await new WebSocketManager(false, token);
+            this.ws = await new WebSocketManager(false, token, this);
             Object.values(EVENTS).forEach((event: any) => {
                 this.ws.on(event, (...args) => this.emit(event, ...args));
             });
