@@ -1,0 +1,35 @@
+export interface eventsInterface {
+    GUILD_CREATE: string
+    GUILD_UPDATE: string
+    GUILD_DELETE: string
+    GUILD_ROLE_CREATE: string
+    GUILD_ROLE_UPDATE: string
+    GUILD_ROLE_DELETE: string
+    GUILD_MEMBER_ADD: string
+    GUILD_MEMBER_UPDATE: string
+    GUILD_MEMBER_REMOVE: string
+    GUILD_BAN_ADD: string
+    GUILD_BAN_REMOVE: string
+    GUILD_EMOJIS_UPDATE: string
+    GUILD_INTEGRATIONS_UPDATE: string
+    WEBHOOK_UPDATE: string
+    INVITE_CREATE: string
+    INVITE_DELETE: string
+    VOICE_STATE_UPDATE: string
+    PRESENCE_UPDATE: string
+    MESSAGE_CREATE: string
+    MESSAGE_UPDATE: string
+    MESSAGE_DELETE: string
+    MESSAGE_DELETE_BULK: string
+    MESSAGE_REACTION_ADD: string
+    MESSAGE_REACTOIN_REMOVE: string
+    MESSAGE_REACTION_REMOVE_ALL: string
+    MESSAGE_REACTION_REMOVE_EMOJI: string
+    TYPING_START: string
+    CHANNEL_CREATE: string
+    CHANNEL_UPDATE: string
+    CHANNEL_DELETE: string
+    CHANNEL_PIN_UPDATE: string
+    READY: string
+    INTERACTION_CREATE: string
+}
