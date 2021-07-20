@@ -3,8 +3,11 @@ import { WebSocketClient, StandardWebSocketClient } from 'https://deno.land/x/we
 
 import { LINKS } from './links.ts';
 import { OPCODES } from "./opcodes.ts";
-import { EVENTS } from "./websocketEvents.ts";
-import {heartBeat, identify} from "./payloads.ts";
+import { EVENTS as e } from "./websocketEvents.ts";
+import { heartBeat, identify } from "./payloads.ts";
+import * as events from '../events/export.ts';
+import { Packet } from '../types/websocket/packet.ts';
+const EVENTS: any = e;
 
 /**
  * @name WebSocketManager - Class to manage discord ws
@@ -38,7 +41,7 @@ export default class WebSocketManager extends EventEmitter {
         });
 
         this.socket.on('message', async (incoming: any) => {
-            const packet = JSON.parse(incoming.data);
+            const packet: Packet = JSON.parse(incoming.data);
             const { op, s, t, d } = packet;
 
             s ? this.sequence = s : 0;
@@ -78,13 +81,10 @@ export default class WebSocketManager extends EventEmitter {
 
             this.debugMode && console.log(packet);
             this.emit('raw', packet);
-            // this.module(EVENTS[t], d)
+            this.module(EVENTS[t], d).then(() => {})
 
             switch (t) {
 
-                case 'MESSAGE_CREATE':
-                        if (d.content == 'XD') console.log('tak')
-                    break;
                 case 'READY':
                         this.debugMode && console.log('[WS]: Connected to gateway!');
                         this.emit('ready');
@@ -102,14 +102,12 @@ export default class WebSocketManager extends EventEmitter {
     }
 
 
-    // some idea for future
-
-    // private async module (name: string, d: any) {
-    //     if (events && (events as any)[name]) {
-    //         const res = await (events as any)[name](d, this.client)
-    //         this.emit(name, res)
-    //     }
-    // }
+    private async module (name: string, d: any) {
+        if (events && (events as any)[name]) {
+            const res = await (events as any)[name](d)
+            this.emit(name, res)
+        }
+    }
 
     /**
      * Creates heatbeat.
