@@ -1,10 +1,10 @@
 import EventEmitter from 'https://deno.land/std@0.84.0/node/events.ts';
 import { WebSocketClient, StandardWebSocketClient } from 'https://deno.land/x/websocket@v0.1.2/mod.ts';
-import { identifyClient, heartbeat } from './WebSocketUtils.ts';
 
 import { LINKS } from './links.ts';
 import { OPCODES } from "./opcodes.ts";
 import { EVENTS } from "./websocketEvents.ts";
+import {heartBeat, identify} from "./payloads.ts";
 
 /**
  * @name WebSocketManager - Class to manage discord ws
@@ -53,18 +53,18 @@ export default class WebSocketManager extends EventEmitter {
                         this.debugMode && console.log(`[WS]: WebSocket send 'HELLO'`);
                         this.debugMode && console.log(packet);
 
-                        this.heart = heartbeat(d.heartbeat_interval, s, d, this.socket);
+                        this.heartbeat(d.heartbeat_interval, s, d);
 
                         this.socket.on('close', () => {
                             clearInterval(this.heart);
                             new WebSocketManager(false, this.token);
-                        })
+                        });
 
                         this.socket.on('error', (e: any) => {
                             this.debugMode && console.log(`[WS ERROR]: ${e}`)
-                        })
+                        });
 
-                        identifyClient(this.isReconnect, this.token, this.socket, this.sessionID)
+                        this.identifyClient(this.token);
 
                     break;
 
@@ -101,6 +101,40 @@ export default class WebSocketManager extends EventEmitter {
     //         this.emit(name, res)
     //     }
     // }
+
+    /**
+     * Creates heatbeat.
+     * @param {number} interval - Heart interval from Discord gateway.
+     * @param {*} s - S from Discord gateway.
+     * @param {*} d - D from Discord gateway.
+     */
+    heartbeat (interval: number, s: any, d: any): void {
+        this.heart = setInterval(() => {
+            heartBeat.s = s;
+            heartBeat.d = d;
+            this.socket.send(JSON.stringify(heartBeat));
+        })
+    }
+
+    /**
+     * Identify to Discord gateway.
+     * @param {string} token - Bot's token.
+     */
+    identifyClient (token: string) {
+        switch (this.isReconnect) {
+            case true:
+                    this.socket.send(JSON.stringify({
+                        op: 6, d: {
+                            token, session_id: this.sessionID
+                        }
+                    }));
+                break;
+            case false:
+                    identify.d.token = token;
+                    this.socket.send(JSON.stringify(identify));
+                break;
+        }
+    }
 
 }
 
