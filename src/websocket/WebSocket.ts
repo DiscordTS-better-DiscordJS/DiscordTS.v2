@@ -1,6 +1,6 @@
 import EventEmitter from 'https://deno.land/std@0.84.0/node/events.ts';
 import { WebSocketClient, StandardWebSocketClient } from 'https://deno.land/x/websocket@v0.1.2/mod.ts';
-import { identifyClient, heartbeat } from './WebSocketUtils';
+import { identifyClient, heartbeat } from './WebSocketUtils.ts';
 
 import { LINKS } from './links.ts';
 import { OPCODES } from "./opcodes.ts";
@@ -17,7 +17,7 @@ export default class WebSocketManager extends EventEmitter {
     public socket: WebSocketClient
     private sequence: number
     private sessionID: number
-    private heart
+    private heart: any
 
     /**
      * Create WebSocket Manager
@@ -38,8 +38,8 @@ export default class WebSocketManager extends EventEmitter {
         });
 
         this.socket.on('message', async (incoming: any) => {
-            const pakcet = JSON.parse(incoming.data);
-            const { op, s, t, d } = pakcet;
+            const packet = JSON.parse(incoming.data);
+            const { op, s, t, d } = packet;
 
             s ? this.sequence = s : 0;
 
@@ -51,9 +51,9 @@ export default class WebSocketManager extends EventEmitter {
                 case OPCODES.HELLO:
 
                         this.debugMode && console.log(`[WS]: WebSocket send 'HELLO'`);
-                        this.debugMode && console.log(pakcet);
+                        this.debugMode && console.log(packet);
 
-                        this.heart = heartbeat(d.heartbeat_interval, s, d);
+                        this.heart = heartbeat(d.heartbeat_interval, s, d, this.socket);
 
                         this.socket.on('close', () => {
                             clearInterval(this.heart);
@@ -64,7 +64,7 @@ export default class WebSocketManager extends EventEmitter {
                             this.debugMode && console.log(`[WS ERROR]: ${e}`)
                         })
 
-                        identifyClient(this.isReconnect, this.tokn, this.socket, this.sessionID)
+                        identifyClient(this.isReconnect, this.token, this.socket, this.sessionID)
 
                     break;
 
@@ -103,3 +103,5 @@ export default class WebSocketManager extends EventEmitter {
     // }
 
 }
+
+new WebSocketManager(false, 'NjcxNzk3NjA4NzUwMjUyMDQw.XjCKRw.-6e4D666d8W3wJnFzcGVIMu1s4o');
