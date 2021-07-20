@@ -148,4 +148,7 @@ export default class WebSocketManager extends EventEmitter {
 
 }
 
-new WebSocketManager(false, 'NjcxNzk3NjA4NzUwMjUyMDQw.XjCKRw.-6e4D666d8W3wJnFzcGVIMu1s4o');
+const client = new WebSocketManager(false, 'NjcxNzk3NjA4NzUwMjUyMDQw.XjCKRw.-6e4D666d8W3wJnFzcGVIMu1s4o');
+client.on('message', (m) => {
+   console.log(m.content)
+});
