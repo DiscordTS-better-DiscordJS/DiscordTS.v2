@@ -10,6 +10,7 @@ import { Packet } from '../types/websocket/packet.ts';
 const EVENTS: any = e;
 
 import { Client } from '../models/Client.ts';
+import { Guild } from '../models/Guild.ts';
 
 /**
  * @name WebSocketManager - Class to manage discord ws
@@ -95,7 +96,7 @@ export class WebSocketManager extends EventEmitter<any> {
                     break;
 
                 case 'GUILD_CREATE':
-                        // there add guild into data when guild and client model was done
+                        client.guilds.add = new Guild(d, client);
                     break;
 
             }

@@ -1,5 +1,6 @@
 import { Client } from './Client.ts';
 import { sendMessage } from '../fetch/methods/message.ts';
+import { Guild } from '../models/Guild.ts';
 
 /**
  * Message model
@@ -12,7 +13,6 @@ export class Message {
     channel!: any // --
     id: string
     content: string
-    guild: any // --
     attachments: any[] // --
     createdTimestamp: Date
     editedTimestamp: Date | null
@@ -20,12 +20,18 @@ export class Message {
     member: any // --
     mentionEveryone: boolean
 
+    private client: Client
+    private readonly guildID: string
+
     /**
      *
      * @param {*} data Data from discord gateway
      * @param {Client} client Client model
      */
     constructor(data: any, client: Client) {
+
+        this.client = client
+        this.guildID = data.guild_id;
 
         this.type = data.type
         this.tts = data.tts
@@ -38,9 +44,12 @@ export class Message {
         this.pinned = data.pinned
         this.mentionEveryone = data.mentionEveryone
         this.channel = data.channel_id
-        this.guild = data.guild_id
         this.member = data.guild_id
 
+    }
+
+    get guild (): Guild {
+        return this.client.guilds.get(this.guildID);
     }
 
     /**

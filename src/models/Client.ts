@@ -17,6 +17,7 @@ import { WebSocketManager } from '../websocket/WebSocket.ts';
 import { ClientOptions } from '../types/models/ClientTypes.ts';
 import { EVENTS } from '../websocket/websocketEvents.ts';
 import { Events } from '../types/eventemitter/Events.ts'
+import { Guilds } from '../cache/guilds.ts';
 
 /**
  * Class representing a Client.
@@ -28,6 +29,8 @@ export class Client extends EventEmitter<Events> {
     token!: string
     options: ClientOptions
 
+    guilds: Guilds
+
     /**
      * Create a Client
      * @param {ClientOptions} options
@@ -37,6 +40,9 @@ export class Client extends EventEmitter<Events> {
 
         this.options = { bot: options?.bot || true };
         this.options.appID = options?.appID || '';
+
+        this.guilds = new Guilds(this)
+
     }
 
     /**

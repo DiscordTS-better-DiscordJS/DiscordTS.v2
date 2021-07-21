@@ -9,17 +9,11 @@ const client = new Client({
 });
 
 client.on('message', (m: Message) => {
-    if (/pseudol/gmi.test(m.content)) {
 
-        const embed = new Embed({
-            color: 'GREEN',
-            description: 'Jest jebany'
-        })
-        m.reply(embed)
-
-    } else if (/aleks/gmi.test(m.content)) {
-        m.reply('<:DeloverOver:867146966839590942>');
+    if (m.content == '@test') {
+        m.reply(client.guilds.get(m.guild.id).name)
     }
+
 });
 
 client.connect(TOKEN);
