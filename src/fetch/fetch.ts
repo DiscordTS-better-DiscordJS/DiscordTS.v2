@@ -11,14 +11,18 @@ export const FETCH = async (data: FetchInterface): Promise<any> => {
         'Authorization': token,
         'Content-Type': data.ContentType ? `${data.ContentType}` : 'application/json'
     }
-
-    console.log(data)
+    
     const res = await fetch(`${API}${data.url}`, {
         method: data.method,
         headers: HEADER,
         body: JSON.stringify(data.body)
     });
 
-    return await res.json();
+    try {
+        const json = await res.json();
+        return json;
+    } catch (e) {
+        console.log(`[DiscordTS sender API ERROR]: ${e}`);
+    }
 
 }

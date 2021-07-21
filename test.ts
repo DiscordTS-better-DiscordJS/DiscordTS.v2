@@ -10,11 +10,10 @@ const client = new Client({
 
 client.on('message', (m: Message) => {
 
-    if (m.content == '@test') {
+    if (/@test/gmi.test(m.content)) {
 
-        m.reply(new Embed({
-            description: m.guild.name
-        }));
+        const args = m.args({ prefix: '@', regexp: new RegExp('[&]', 'gmi') });
+        m.reply(args.join(' | '));
 
     }
 

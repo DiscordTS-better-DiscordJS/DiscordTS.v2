@@ -5,3 +5,8 @@ export interface messageOptions {
     tts?: boolean
     embed?: Embed
 }
+
+export interface argsOptions {
+    regexp?: RegExp
+    prefix?: string
+}

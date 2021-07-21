@@ -2,7 +2,7 @@ import { Client } from './Client.ts';
 import { sendMessage } from '../fetch/methods/message.ts';
 import { Guild } from '../models/Guild.ts';
 import { Embed } from '../models/Embed.ts';
-import { messageOptions } from '../types/models/message.ts';
+import { messageOptions, argsOptions } from '../types/models/message.ts';
 
 /**
  * Message model
@@ -60,6 +60,7 @@ export class Message {
      * @description Reply to member message // todo nonmention
      */
      reply (content: string | Embed | messageOptions) /* embed support when embedes was added */ {
+         console.log(content)
         let msg: any = {};
         if (typeof content == 'string') msg = { content };
         else if (content instanceof Embed) {
@@ -70,14 +71,29 @@ export class Message {
             content.content ? msg.content = content.content : null;
         }
 
-        msg.tts = false
+        msg.tts = false;
 
         msg.message_reference = {                // wheh channel model was added there channel should be change into channel.id
             message_id: this.id, channel_id: this.channel,
             guild_id: this.guild.id // same as channel, into guild.id
-        }
+        };
 
         sendMessage(msg, msg.message_reference.channel_id);
+    }
+
+    /**
+     * Create arguments array from message content
+     * @param {argsOptions} options - Options that be used in method.
+     * @return string[] - Array of arguments created from message content.
+     */
+    args (options?: argsOptions): string[] {
+        let args: string[] = [];
+        let content: string = this.content;
+        options?.prefix ? content = content.slice(options?.prefix.length) : null;
+        if (options?.regexp) {
+            args = content.split(options.regexp);
+        } else args = content.split(/ +/gmi);
+        return args;
     }
 
 }
