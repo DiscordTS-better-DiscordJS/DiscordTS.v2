@@ -11,7 +11,11 @@ const client = new Client({
 client.on('message', (m: Message) => {
 
     if (m.content == '@test') {
-        m.reply(client.guilds.get(m.guild.id).name)
+
+        m.reply(new Embed({
+            description: m.guild.name
+        }));
+
     }
 
 });

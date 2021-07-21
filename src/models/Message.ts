@@ -1,6 +1,8 @@
 import { Client } from './Client.ts';
 import { sendMessage } from '../fetch/methods/message.ts';
 import { Guild } from '../models/Guild.ts';
+import { Embed } from '../models/Embed.ts';
+import { messageOptions } from '../types/models/message.ts';
 
 /**
  * Message model
@@ -57,17 +59,22 @@ export class Message {
      * @param {string} content Content of message // embed soon
      * @description Reply to member message // todo nonmention
      */
-     reply (content: string | any) /* embed support when embedes was added */ {
+     reply (content: string | Embed | messageOptions) /* embed support when embedes was added */ {
         let msg: any = {};
         if (typeof content == 'string') msg = { content };
-        else {
-            delete content.clear
-            msg = { embeds: [content], content: "" }
+        else if (content instanceof Embed) {
+            msg = { embedes: [content.data], content: "" };
+        } else {
+            content.embed ? msg.embedes = [content.embed.data] : null;
+            content.tts ? msg.tts = true : msg.tts = false;
+            content.content ? msg.content = content.content : null;
         }
+
+        msg.tts = false
 
         msg.message_reference = {                // wheh channel model was added there channel should be change into channel.id
             message_id: this.id, channel_id: this.channel,
-            guild_id: this.guild // same as channel, into guild.id
+            guild_id: this.guild.id // same as channel, into guild.id
         }
 
         sendMessage(msg, msg.message_reference.channel_id);

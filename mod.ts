@@ -11,3 +11,4 @@ export * from './src/types/models/ClientTypes.ts';
 export * from './src/types/models/channel.ts';
 export * from './src/types/models/guild.ts';
 export * from './src/types/models/embed.ts';
+export * from './src/types/models/message.ts';
