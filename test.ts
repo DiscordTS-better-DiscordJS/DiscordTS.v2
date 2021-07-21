@@ -12,8 +12,12 @@ client.on('message', (m: Message) => {
 
     if (/@test/gmi.test(m.content)) {
 
-        const args = m.args({ prefix: '@', regexp: new RegExp('[&]', 'gmi') });
-        m.reply(args.join(' | '));
+        const args = m.args({ prefix: '@', includeCommandName: true });
+        m.reply(
+            new Embed({
+                description: args.join(' | ')
+            })
+        );
 
     }
 

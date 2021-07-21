@@ -9,4 +9,5 @@ export interface messageOptions {
 export interface argsOptions {
     regexp?: RegExp
     prefix?: string
+    includeCommandName?: boolean
 }

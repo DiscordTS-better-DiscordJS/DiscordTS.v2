@@ -11,7 +11,7 @@ export const FETCH = async (data: FetchInterface): Promise<any> => {
         'Authorization': token,
         'Content-Type': data.ContentType ? `${data.ContentType}` : 'application/json'
     }
-    
+
     const res = await fetch(`${API}${data.url}`, {
         method: data.method,
         headers: HEADER,

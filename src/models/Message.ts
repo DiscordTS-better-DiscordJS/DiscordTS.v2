@@ -60,13 +60,12 @@ export class Message {
      * @description Reply to member message // todo nonmention
      */
      reply (content: string | Embed | messageOptions) /* embed support when embedes was added */ {
-         console.log(content)
         let msg: any = {};
         if (typeof content == 'string') msg = { content };
         else if (content instanceof Embed) {
-            msg = { embedes: [content.data], content: "" };
+            msg = { embeds: [content.data], content: "" };
         } else {
-            content.embed ? msg.embedes = [content.embed.data] : null;
+            content.embed ? msg.embeds = [content.embed.data] : null;
             content.tts ? msg.tts = true : msg.tts = false;
             content.content ? msg.content = content.content : null;
         }
@@ -93,6 +92,7 @@ export class Message {
         if (options?.regexp) {
             args = content.split(options.regexp);
         } else args = content.split(/ +/gmi);
+        if (options?.includeCommandName) delete args[0];
         return args;
     }
 
