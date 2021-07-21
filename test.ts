@@ -8,16 +8,19 @@ const client = new Client({
     bot: true // optional, default this options value is true
 });
 
-client.on('message', (m: Message) => {
+client.on('message', async (m: Message) => {
 
     if (/@test/gmi.test(m.content)) {
 
-        const args = m.args({ prefix: '@', includeCommandName: true });
-        m.reply(
+        console.log(
+            m.guild.channels.get(m.channel.id)?.name
+        )
+
+        await m.reply(
             new Embed({
-                description: args.join(' | ')
+                description: `${m.guild.channels.get(m.channel.id)}`
             })
-        );
+        )
 
     }
 

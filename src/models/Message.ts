@@ -56,10 +56,11 @@ export class Message {
 
     /**
      * Reply to message
+     * @async
      * @param {string} content Content of message // embed soon
      * @description Reply to member message // todo nonmention
      */
-     reply (content: string | Embed | messageOptions) /* embed support when embedes was added */ {
+     async reply (content: string | Embed | messageOptions) /* embed support when embedes was added */ {
         let msg: any = {};
         if (typeof content == 'string') msg = { content };
         else if (content instanceof Embed) {
@@ -77,7 +78,7 @@ export class Message {
             guild_id: this.guild.id // same as channel, into guild.id
         };
 
-        sendMessage(msg, msg.message_reference.channel_id);
+        return sendMessage(msg, msg.message_reference.channel_id);
     }
 
     /**

@@ -1,5 +1,7 @@
 import { guldHashes } from '../types/models/guild.ts';
 import { Client } from '../models/Client.ts';
+import { Channel } from './Channel.ts';
+import { Collection } from "./Collection.ts";
 
 /**
  * Class representing Guild
@@ -26,7 +28,8 @@ export class Guild {
     unvailable: boolean
     explicitContentFilter: number
     // roles: I think getter that returns role from cache that i made in future xD
-    channelsIDs: string[] // I think array with ID's and getter to get model
+    // channelsIDs: string[] // I think array with ID's and getter to get model?
+    channels: Collection<string, Channel>
     ownerID: string
     banner: string
     afkChannelID: string | null
@@ -83,7 +86,6 @@ export class Guild {
         this.lazdy = data.lazdy;
         this.publicUpdateChannelID = data.public_update_channel_id;
         this.defaultMessageNotifications = data.default_message_notifications;
-        this.channelsIDs = data.channels;
         this.maxVideoChannelUsers = data.max_video_channel_users;
         this.explicitContentFilter = data.explicit_content_filter;
         this.icon = data.icon;
@@ -93,6 +95,8 @@ export class Guild {
         this.vanityUrlCode = data.vanity_url_code;
         this.threads = data.threads;
 
+        this.channels = new Collection();
+        data.channels.forEach((e: any) => this.channels.set(`${e.id}`, new Channel(e, client)))
         // this.roles
         // this.members
         // this.emojis

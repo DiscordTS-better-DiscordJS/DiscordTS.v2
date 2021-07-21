@@ -2,6 +2,8 @@
  * Class representing Collection
  * @extends Map
  */
+import {Guild} from "./Guild.ts";
+
 export class Collection<K, V> extends Map<K, V> {
     constructor() {
         super();
@@ -24,6 +26,17 @@ export class Collection<K, V> extends Map<K, V> {
      */
     getOne (value: K): V | any {
         return this.get(value)
+    }
+
+    /**
+     * Get array from collection
+     */
+     get array (): [{ key: K, value: V }] {
+        let it: any = []
+        for (let [k ,v] of this) {
+            it.push({key: k, value: v});
+        }
+        return it;
     }
 
 }
