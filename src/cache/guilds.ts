@@ -35,7 +35,7 @@ export class Guilds {
     }
 
     get array (): Guild[] {
-        return this.#cache.array.map(e => e.value);
+        return this.#cache.array.map(e => e);
     }
 
 }

@@ -32,21 +32,21 @@ export class Message {
      */
     constructor(data: any, client: Client) {
 
-        this.client = client
+        this.client = client;
         this.guildID = data.guild_id;
 
-        this.type = data.type
-        this.tts = data.tts
-        this.author = data.author
-        this.id = data.id
-        this.content = data.content
-        this.attachments = data.attachments
-        this.createdTimestamp = data.timestamp
-        this.editedTimestamp = data.editedTimestamp
-        this.pinned = data.pinned
-        this.mentionEveryone = data.mentionEveryone
-        this.channel = data.channel_id
-        this.member = data.guild_id
+        this.type = data.type;
+        this.tts = data.tts;
+        this.author = data.author;
+        this.id = data.id;
+        this.content = data.content;
+        this.attachments = data.attachments;
+        this.createdTimestamp = data.timestamp;
+        this.editedTimestamp = data.editedTimestamp;
+        this.pinned = data.pinned;
+        this.mentionEveryone = data.mentionEveryone;
+        this.channel = client.guilds.get(this.guildID).channels.array.find(c => c.id == this.id);
+        this.member = data.guild_id;
 
     }
 

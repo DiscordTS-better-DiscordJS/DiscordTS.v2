@@ -31,10 +31,10 @@ export class Collection<K, V> extends Map<K, V> {
     /**
      * Get array from collection
      */
-     get array (): [{ key: K, value: V }] {
+     get array (): V[] {
         let it: any = []
         for (let [k ,v] of this) {
-            it.push({key: k, value: v});
+            it.push(v);
         }
         return it;
     }

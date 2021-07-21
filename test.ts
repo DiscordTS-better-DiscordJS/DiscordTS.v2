@@ -12,13 +12,9 @@ client.on('message', async (m: Message) => {
 
     if (/@test/gmi.test(m.content)) {
 
-        console.log(
-            m.guild.channels.get(m.channel.id)?.name
-        )
-
         await m.reply(
             new Embed({
-                description: `${m.guild.channels.get(m.channel.id)}`
+                description: `${m.channel.name}`
             })
         )
 
