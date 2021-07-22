@@ -1,5 +1,8 @@
 import { CHANNEL_TYPES } from '../types/models/channel.ts';
 import { Client } from '../models/Client.ts';
+import {Embed} from "./Embed.ts";
+import {messageOptions} from "../types/models/message.ts";
+import {sendMessage} from "../fetch/methods/message.ts";
 const channeltypes: any = CHANNEL_TYPES
 /**
  * Class representing Channel
@@ -35,6 +38,28 @@ export class Channel {
         this.parentID = data.parent_id;
 
 
+    }
+
+    /**
+     * Send message to channel
+     * @async
+     * @param {string} content Content of message
+     * @description Send message to channel
+     */
+    async send (content: string | Embed | messageOptions){
+        let msg: any = {};
+        if (typeof content == 'string') msg = { content };
+        else if (content instanceof Embed) {
+            msg = { embeds: [content.data], content: "" };
+        } else {
+            content.embed ? msg.embeds = [content.embed.data] : null;
+            content.tts ? msg.tts = true : msg.tts = false;
+            content.content ? msg.content = content.content : null;
+        }
+
+        msg.tts = false;
+
+        return sendMessage(msg, this.id);
     }
 
 }

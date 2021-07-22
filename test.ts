@@ -12,9 +12,12 @@ client.on('message', async (m: Message) => {
 
     if (/@test/gmi.test(m.content)) {
 
-        await m.reply(
+        await m.channel.send(
             new Embed({
-                description: `${m.channel.name}`
+                description: [
+                    `${m.channel.name}`,
+                    `${client.channels.get('867003800673714186').name}`
+                ].join('\n')
             })
         )
 

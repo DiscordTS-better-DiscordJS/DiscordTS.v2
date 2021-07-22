@@ -3,6 +3,7 @@ import { sendMessage } from '../fetch/methods/message.ts';
 import { Guild } from '../models/Guild.ts';
 import { Embed } from '../models/Embed.ts';
 import { messageOptions, argsOptions } from '../types/models/message.ts';
+import { Channel } from '../models/Channel.ts';
 
 /**
  * Message model
@@ -12,7 +13,6 @@ export class Message {
     tts: boolean
     type: number
     author: any // --
-    channel!: any // --
     id: string
     content: string
     attachments: any[] // --
@@ -24,6 +24,7 @@ export class Message {
 
     private client: Client
     private readonly guildID: string
+    private readonly channelID: string
 
     /**
      *
@@ -34,6 +35,7 @@ export class Message {
 
         this.client = client;
         this.guildID = data.guild_id;
+        this.channelID = data.channel_id;
 
         this.type = data.type;
         this.tts = data.tts;
@@ -45,13 +47,16 @@ export class Message {
         this.editedTimestamp = data.editedTimestamp;
         this.pinned = data.pinned;
         this.mentionEveryone = data.mentionEveryone;
-        this.channel = client.guilds.get(this.guildID).channels.array.find(c => c.id == this.id);
         this.member = data.guild_id;
 
     }
 
     get guild (): Guild {
         return this.client.guilds.get(this.guildID);
+    }
+
+    get channel (): Channel {
+        return this.client.channels.get(this.channelID);
     }
 
     /**
@@ -73,9 +78,9 @@ export class Message {
 
         msg.tts = false;
 
-        msg.message_reference = {                // wheh channel model was added there channel should be change into channel.id
-            message_id: this.id, channel_id: this.channel,
-            guild_id: this.guild.id // same as channel, into guild.id
+        msg.message_reference = {
+            message_id: this.id, channel_id: this.channel.id,
+            guild_id: this.guild.id
         };
 
         return sendMessage(msg, msg.message_reference.channel_id);
