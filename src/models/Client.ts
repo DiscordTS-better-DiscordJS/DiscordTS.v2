@@ -67,6 +67,11 @@ export class Client extends EventEmitter<Events> {
         }
     }
 
+    get memoryUsage(): number {
+        return (~~(Math.round((Deno.memoryUsage().rss) / 1024 / 1024)));
+    }
 }
+
+
 
 export { OPTIONS }
