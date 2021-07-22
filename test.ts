@@ -6,7 +6,7 @@ import {
 
 const client = new Client();
 
-client.on('message', async (m: Message) => {
+client.on('message', (m) => {
 
     if (/@test/gmi.test(m.content)) {
 

@@ -11,8 +11,7 @@ class Options {
 
 const OPTIONS = new Options();
 
-// imports
-import { EventEmitter } from 'https://deno.land/x/event@2.0.0/mod.ts'
+import { EventsEmitter } from '../utils/EventsEmitter.ts';
 import { WebSocketManager } from '../websocket/WebSocket.ts';
 import { ClientOptions } from '../types/models/ClientTypes.ts';
 import { EVENTS } from '../websocket/websocketEvents.ts';
@@ -22,16 +21,16 @@ import { Channels } from '../cache/channels.ts';
 
 /**
  * Class representing a Client.
- * @extends EventEmitter
+ * @extends EventsEmitter
  */
-export class Client extends EventEmitter<Events> {
+class Client extends EventsEmitter<Events> {
 
-    ws!: WebSocketManager
-    token!: string
-    options: ClientOptions
+    public ws!: WebSocketManager
+    public token!: string
+    public options: ClientOptions
 
-    guilds: Guilds
-    channels: Channels
+    public guilds: Guilds
+    public channels: Channels
 
     /**
      * Create a Client
@@ -47,7 +46,7 @@ export class Client extends EventEmitter<Events> {
         this.channels = new Channels(this);
 
     }
-
+    
     /**
      * Connect into discord gateway
      * @param {string} token
@@ -72,6 +71,4 @@ export class Client extends EventEmitter<Events> {
     }
 }
 
-
-
-export { OPTIONS }
+export { OPTIONS, Client }

@@ -1,5 +1,7 @@
-import { Message } from '../../models/Message.ts'
+import { Client } from '../../models/Client.ts';
+import { Message } from '../../models/Message.ts';
 
 export type Events = {
-    message: [Message]
+    message (message: Message): void,
+    ready (client: Client): void
 }
