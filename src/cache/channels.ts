@@ -33,7 +33,18 @@ export class Channels {
      */
     get (id: string): Channel {
         const data = this.#cache.getOne(id);
-        return new Channel(data, this.client)
+        if (data.id) return new Channel(data, this.client)
+        else throw new Error(`No channel data in cache of id: ${id}`)
+    }
+
+    /**
+     * Check channel in cache
+     * @param {string} id
+     * @return {boolean}
+     */
+    has (id: string): boolean {
+        if (this.#cache.has(id)) return true;
+        else return false;
     }
 
     get array (): Channel[] {

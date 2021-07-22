@@ -98,7 +98,7 @@ export class Message {
         if (options?.regexp) {
             args = content.split(options.regexp);
         } else args = content.split(/ +/gmi);
-        if (options?.includeCommandName) delete args[0];
+        if (options?.includeCommandName) args = args.slice(1);
         return args;
     }
 

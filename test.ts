@@ -21,6 +21,16 @@ client.on('message', async (m: Message) => {
             })
         )
 
+    } else if (/@demo/gmi.test(m.content)) {
+
+        const args = m.args({ prefix: '@', includeCommandName: true });
+
+        if (!client.channels.has(args[0])) return m.channel.send('Nie mam takiego kanalu');
+        else return m.reply(new Embed({
+            title: 'Nazwa kanalu z ID',
+            description: `${client.channels.get(args[0]).name}`
+        }));
+
     }
 
 });
