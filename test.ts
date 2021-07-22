@@ -20,13 +20,11 @@ client.on('message', async (m: Message) => {
 
     } else if (/@ram/gmi.test(m.content)) {
 
-        const p = Deno.run({ cmd: ['Deno.memoryUsage().rss'] });
-        const { code } = await p.status();
-        const rawOutput = await p.output();
+        const memoryUsage = (~~(Math.round((await Deno.memoryUsage().rss) / 1024 / 1024)));
 
         return m.reply(new Embed({
-            description: `${rawOutput} MB`
-        }))
+            description: `${memoryUsage} MB`
+        }));
 
     }
 
