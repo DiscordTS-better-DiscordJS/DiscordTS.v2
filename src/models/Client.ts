@@ -46,7 +46,7 @@ class Client extends EventsEmitter<Events> {
         this.channels = new Channels(this);
 
     }
-    
+
     /**
      * Connect into discord gateway
      * @param {string} token

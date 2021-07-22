@@ -6,7 +6,14 @@ import {
 
 const client = new Client();
 
-client.on('message', (m) => {
+// it require heeelpp xDDDD
+// client.on('ready',async () => {
+//     console.log('Gotowy!')
+//     const c = client.channels.get('867134821330059274');
+//     await c.send('Uruchomiłem się!')
+// })
+
+client.on('message', async (m) => {
 
     if (/@test/gmi.test(m.content)) {
 
