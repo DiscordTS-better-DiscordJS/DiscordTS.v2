@@ -110,7 +110,7 @@ export class WebSocketManager extends EventEmitter<any> {
     private async module (name: string, d: any, client: Client) {
         if (events && (events as any)[name]) {
             const res = await (events as any)[name](d, client);
-            if (res) this.emit(name, res);
+            if (typeof res !== 'undefined') this.emit(name, res);
             else return;
         }
     }

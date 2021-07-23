@@ -16,5 +16,5 @@ export const _ = async (data: any, client: Client) => {
 
         return message;
     }
-    return false;
+    return undefined;
 }
