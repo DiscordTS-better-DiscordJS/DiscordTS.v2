@@ -18,6 +18,7 @@ import { EVENTS } from '../websocket/websocketEvents.ts';
 import { Events } from '../types/eventemitter/Events.ts'
 import { Guilds } from '../cache/guilds.ts';
 import { Channels } from '../cache/channels.ts';
+import { Memebrs } from '../cache/members.ts';
 
 /**
  * Class representing a Client.
@@ -31,6 +32,7 @@ class Client extends EventsEmitter<Events> {
 
     public guilds: Guilds
     public channels: Channels
+    public _memebrs: Memebrs
 
     /**
      * Create a Client
@@ -44,6 +46,7 @@ class Client extends EventsEmitter<Events> {
 
         this.guilds = new Guilds(this);
         this.channels = new Channels(this);
+        this._memebrs = new Memebrs(this);
 
     }
 

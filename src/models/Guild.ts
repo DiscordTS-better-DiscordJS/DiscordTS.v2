@@ -2,6 +2,7 @@ import { guldHashes } from '../types/models/guild.ts';
 import { Client } from '../models/Client.ts';
 import { Channel } from './Channel.ts';
 import { Collection } from "./Collection.ts";
+import {Member} from "./Member.ts";
 
 /**
  * Class representing Guild
@@ -28,13 +29,11 @@ export class Guild {
     unvailable: boolean
     explicitContentFilter: number
     // roles: I think getter that returns role from cache that i made in future xD
-    // channelsIDs: string[] // I think array with ID's and getter to get model?
     channels: Collection<string, Channel>
     ownerID: string
     banner: string
     afkChannelID: string | null
     applicationID: string  | null
-    // members: same as roles and channels
     large: boolean
     memberCount: number
     joinedAt: string
@@ -51,6 +50,8 @@ export class Guild {
     verificatinLevel: number
     // me: Member model from Client
 
+    private client: Client
+
     /**
      * Create Guild model
      * @param {*} data
@@ -58,6 +59,7 @@ export class Guild {
      */
     constructor (data: any, client: Client) {
 
+        this.client = client;
         this.mfaLevel = data.mfa_level;
         this.presence = data.presence;
         this.systemChannelID = data.system_channel_id;
@@ -102,4 +104,8 @@ export class Guild {
         // this.emojis
     }
 
+    get members (): Member[] {
+        return this.client._memebrs.getAll(this.id);
+    }
 }
+

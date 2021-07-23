@@ -17,7 +17,7 @@ client.on('message', async (m) => {
 
     if (/@test/gmi.test(m.content)) {
 
-        console.log()
+        m.channel.send(m.member.nickname)
         
     } else if (/@ram/gmi.test(m.content)) {
 

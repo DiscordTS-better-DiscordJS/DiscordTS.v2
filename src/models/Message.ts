@@ -4,6 +4,7 @@ import { Guild } from '../models/Guild.ts';
 import { Embed } from '../models/Embed.ts';
 import { messageOptions, argsOptions } from '../types/models/message.ts';
 import { Channel } from '../models/Channel.ts';
+import { Member } from '../models/Member.ts';
 
 /**
  * Message model
@@ -19,7 +20,6 @@ export class Message {
     createdTimestamp: Date
     editedTimestamp: Date | null
     pinned: boolean
-    member: any // --
     mentionEveryone: boolean
 
     private client: Client
@@ -47,7 +47,6 @@ export class Message {
         this.editedTimestamp = data.editedTimestamp;
         this.pinned = data.pinned;
         this.mentionEveryone = data.mentionEveryone;
-        this.member = data.guild_id;
 
     }
 
@@ -57,6 +56,10 @@ export class Message {
 
     get channel (): Channel {
         return this.client.channels.get(this.channelID);
+    }
+
+    get member (): Member {
+        return this.client._memebrs.getOne(this.guildID, this.author.id)
     }
 
     /**

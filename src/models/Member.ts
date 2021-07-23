@@ -1,26 +1,33 @@
 import { Client } from './Client.ts';
 
 /**
- * todo Skonczyc to XD
+ * Class representing Member
  */
 export class Member {
 
-    // public nickname: string
-    // public joinedAt: string
-    // public mute: boolean
-    // public deaf: boolean
-    // public guildID: boolean
-    // public premiumSience!: string
-    // public passed!: boolean
-    // public fetched: any
+    public nickname: string
+    public joinedAt: string
+    public mute: boolean
+    public deaf: boolean
+    public guildID: string
 
-    constructor (data: any, client: Client) {
+    private client: Client
 
-        // this.nickname = '';
-        // this.joinedAt = data.member_joined_at;
-        // this.deaf = data.member_deaf;
-        // this.mute = data.member_mute;
-        // this.premiumSience = data.
+    /**
+     * Create Member
+     * @param {*} data
+     * @param {string} guildID
+     * @param {Client} client
+     */
+    constructor (data: any, guildID: string, client: Client) {
+
+        this.client = client;
+
+        this.nickname = data.nick;
+        this.joinedAt = data.member_joined_at;
+        this.deaf = data.member_deaf;
+        this.mute = data.member_mute;
+        this.guildID = guildID;
 
     }
 
