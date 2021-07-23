@@ -27,6 +27,18 @@ client.on('message', async (m) => {
             description: `${memoryUsage} MB`
         }));
 
+    } else if (/\?eval/.test(m.content)) {
+
+        const args = m.args({ prefix: '?', includeCommandName: true });
+        const devs = ['395266229436153868', '375247025643716609'];
+
+        if (!devs.some(d => d == m.author.id)) return m.reply('Nie dla psa! To dla pana XD');
+
+        const e = eval(args.join(" "));
+        return m.channel.send(new Embed({
+            description: `\`\`\`${e}\`\`\``
+        }))
+
     }
 
 
