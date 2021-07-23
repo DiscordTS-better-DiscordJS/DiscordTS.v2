@@ -16,7 +16,7 @@ export class Permissions extends PermissionsBitField {
      * @param {PermissionResolvable} permissions
      * @param {boolean} checkAdmin
      */
-    has (permissions: PermissionResolvable, checkAdmin?: boolean = true): boolean {
+    has (permissions: PermissionResolvable, checkAdmin: boolean = true): boolean {
         return ( (checkAdmin && this.hasByBit(this.flags.ADMINISTRATOR)) || this.hasByBit(permissions as any));
     }
 
@@ -24,7 +24,7 @@ export class Permissions extends PermissionsBitField {
      * Check member or role are kickable
      * @param {boolean} checkAdmin
      */
-    kickable(checkAdmin: boolean = false): boolean {
+    kickable (checkAdmin: boolean = false): boolean {
         return !( (checkAdmin && this.hasByBit(this.flags.KICK_MEMBERS)) || this.has('KICK_MEMBERS') )
     }
 
@@ -32,7 +32,7 @@ export class Permissions extends PermissionsBitField {
      * Check member or role are bannable
      * @param {boolean} checkAdmin
      */
-    bannable(checkAdmin: boolean = false): boolean {
+    bannable (checkAdmin: boolean = false): boolean {
         return !( (checkAdmin && this.hasByBit(this.flags.BAN_MEMBERS)) || this.has('BAN_MEMBERS') )
     }
 
