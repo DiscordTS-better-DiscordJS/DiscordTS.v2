@@ -34,10 +34,19 @@ client.on('message', async (m) => {
 
         if (!devs.some(d => d == m.author.id)) return m.reply('Nie dla psa! To dla pana XD');
 
-        const e = eval(args.join(" "));
-        return m.channel.send(new Embed({
-            description: `\`\`\`${e}\`\`\``
-        }))
+
+        try {
+            const ev = eval(args.join(" "));
+            return m.channel.send(new Embed({
+                description: `\`\`\`${JSON.stringify(ev)}\`\`\``
+            }))
+
+        } catch (e) {
+            return m.channel.send(new Embed({
+                description: `\`\`\`${e}\`\`\``
+            }))
+        }
+
 
     }
 

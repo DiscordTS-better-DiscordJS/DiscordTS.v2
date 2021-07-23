@@ -27,7 +27,7 @@ import { Memebrs } from '../cache/members.ts';
 class Client extends EventsEmitter<Events> {
 
     public ws!: WebSocketManager
-    public token!: string
+    private token!: string
     public options: ClientOptions
 
     public guilds: Guilds

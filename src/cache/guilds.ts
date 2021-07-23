@@ -7,7 +7,7 @@ import { Client } from '../models/Client.ts';
  */
 export class Guilds {
 
-    #cache: Collection<string, Guild> = new Collection()
+    public cache: Collection<string, Guild> = new Collection()
     private client: Client
 
     /**
@@ -23,7 +23,7 @@ export class Guilds {
      * @param {Guild} guild
      */
     set add (guild: Guild) {
-        this.#cache.set(guild.id, guild);
+        this.cache.set(guild.id, guild);
     }
 
     /**
@@ -31,11 +31,11 @@ export class Guilds {
      * @param {string} id
      */
     get (id: string): Guild {
-        return (this.#cache.getOne(id));
+        return (this.cache.getOne(id));
     }
 
     get array (): Guild[] {
-        return this.#cache.array.map(e => e);
+        return this.cache.array.map(e => e);
     }
 
 }
