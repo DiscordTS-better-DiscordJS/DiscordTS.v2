@@ -1,10 +1,10 @@
 import { Client } from './Client.ts';
 import { sendMessage } from '../fetch/methods/message.ts';
-import { Guild } from '../models/Guild.ts';
-import { Embed } from '../models/Embed.ts';
+import { Guild } from './Guild.ts';
+import { Embed } from './Embed.ts';
 import { messageOptions, argsOptions } from '../types/models/message.ts';
-import { Channel } from '../models/Channel.ts';
-import { Member } from '../models/Member.ts';
+import { Channel } from './Channel.ts';
+import { Member } from './Member.ts';
 
 /**
  * Message model

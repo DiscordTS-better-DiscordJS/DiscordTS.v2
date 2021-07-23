@@ -46,7 +46,7 @@ class Client extends EventsEmitter<Events> {
 
         this.guilds = new Guilds(this);
         this.channels = new Channels(this);
-        this._memebrs = new Memebrs(this);
+        this._memebrs = new Memebrs();
 
     }
 

@@ -104,8 +104,8 @@ export class Guild {
         // this.emojis
     }
 
-    get members (): Member[] {
-        return this.client._memebrs.getAll(this.id);
-    }
+    // get members (): Member[] {
+    //     return this.client._memebrs.getAll(this.id);
+    // }
 }
 

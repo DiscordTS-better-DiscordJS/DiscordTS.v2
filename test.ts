@@ -15,11 +15,11 @@ const client = new Client();
 
 client.on('message', async (m) => {
 
-    if (/@test/gmi.test(m.content)) {
+    if (/\?test/gmi.test(m.content)) {
 
-        m.channel.send(m.member.nickname)
+        m.channel.send(`${JSON.stringify(m.member)}`);
         
-    } else if (/@ram/gmi.test(m.content)) {
+    } else if (/\?ram/gmi.test(m.content)) {
 
         const memoryUsage = client.memoryUsage;
 

@@ -98,8 +98,6 @@ export class WebSocketManager extends EventEmitter<any> {
                 case 'GUILD_CREATE':
                         client.guilds.add = new Guild(d, client);
                         d.channels.forEach((c: any) => client.channels.add = c);
-                        client._memebrs.add(d.id, d.members);
-                        console.log(d.members)
                     break;
 
             }
