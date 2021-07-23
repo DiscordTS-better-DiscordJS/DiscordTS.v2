@@ -4,7 +4,7 @@ import { fetchMember } from '../fetch/methods/member.ts';
 
 export const _ = async (data: any, client: Client) => {
 
-    if (data.type == 'DEFAULT') {
+    if (data.type == 0) {
         const message = new Message(data, client);
         const gID = message.guild.id;
         const uID = message.author.id;
@@ -16,5 +16,5 @@ export const _ = async (data: any, client: Client) => {
 
         return message;
     }
-    
+    return false;
 }

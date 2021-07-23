@@ -20,7 +20,7 @@ export class Member {
 
         console.log(data);
 
-        this.nickname = data.nick || '';
+        this.nickname = data.nick != null ? data.nick : 'none';
         this.joinedAt = data.joined_at || '';
         this.deaf = data.deaf;
         this.mute = data.mute;

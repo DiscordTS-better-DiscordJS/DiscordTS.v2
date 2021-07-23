@@ -14,10 +14,10 @@ const client = new Client();
 // })
 
 client.on('message', async (m) => {
-
+    console.log(m);
     if (/\?test/gmi.test(m.content)) {
 
-        m.channel.send(`${JSON.stringify(m.member)}`);
+        m.channel?.send(m.member.nickname);
         
     } else if (/\?ram/gmi.test(m.content)) {
 
