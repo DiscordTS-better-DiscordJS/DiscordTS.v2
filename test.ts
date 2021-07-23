@@ -1,7 +1,7 @@
 import { TOKEN } from './token.ts';
 
 import {
-    Client, Message, Embed
+    Client, Embed, Permissions
 } from './mod.ts'
 
 const client = new Client();
@@ -34,6 +34,8 @@ client.on('message', async (m) => {
         }));
 
     }
+
+
 
 });
 
