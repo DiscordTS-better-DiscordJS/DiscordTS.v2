@@ -1,33 +1,25 @@
-import { Collection } from '../models/Collection.ts';
+import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { User } from '../models/User.ts';
 
 /**
  * Class representing Users cache
  */
-export class Users {
-
-    #cache: Collection<string, any> = new Collection()
+export class Users extends CacheBaseModel<string, any> {
 
     /**
-     * Create a guild cahce
+     * Create a user cahce
      */
-    constructor () {}
-
-    /**
-     * Add channel ws data into cache
-     * @param {*} channel - Data from WS
-     */
-    set add (channel: any) {
-        this.#cache.set(channel.id, channel);
+    constructor () {
+        super ();
     }
 
     /**
-     * Get channel ws data from cache
+     * Get user ws data from cache
      * @param {string} id
-     * @return {Channel} Channel - Returns channel model
+     * @return {Channel} Channel - Returns user model
      */
     get (id: string): User {
-        const data = this.#cache.getOne(id);
+        const data = this.collection.getOne(id);
         if (data.id) return new User(data);
         else throw new Error(`No user data in cache of id: ${id}`)
     }
@@ -38,12 +30,8 @@ export class Users {
      * @return {boolean}
      */
     has (id: string): boolean {
-        if (this.#cache.has(id)) return true;
+        if (this.collection.has(id)) return true;
         else return false;
-    }
-
-    get array (): User[] {
-        return this.#cache.array.map(e => e);
     }
 
 }
