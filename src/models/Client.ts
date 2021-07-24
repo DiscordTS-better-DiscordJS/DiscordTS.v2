@@ -9,7 +9,14 @@ class Options {
     }
 }
 
+class Cache {
+    public guilds!: Guilds
+    public channels!: Channels
+    public _memebrs!: Memebrs
+}
+
 const OPTIONS = new Options();
+const CACHE = new Cache();
 
 import { EventsEmitter } from '../utils/EventsEmitter.ts';
 import { WebSocketManager } from '../websocket/WebSocket.ts';
@@ -30,10 +37,6 @@ class Client extends EventsEmitter<Events> {
     private token!: string
     public options: ClientOptions
 
-    public guilds: Guilds
-    public channels: Channels
-    public _memebrs: Memebrs
-
     /**
      * Create a Client
      * @param {ClientOptions} options
@@ -44,9 +47,9 @@ class Client extends EventsEmitter<Events> {
         this.options = { bot: options?.bot || true };
         this.options.appID = options?.appID || '';
 
-        this.guilds = new Guilds(this);
-        this.channels = new Channels(this);
-        this._memebrs = new Memebrs();
+        CACHE.guilds = new Guilds();
+        CACHE.channels = new Channels();
+        CACHE._memebrs = new Memebrs();
 
     }
 
@@ -74,4 +77,4 @@ class Client extends EventsEmitter<Events> {
     }
 }
 
-export { OPTIONS, Client }
+export { OPTIONS, Client, CACHE }

@@ -8,15 +8,11 @@ import { Client } from '../models/Client.ts';
 export class Channels {
 
     #cache: Collection<string, any> = new Collection()
-    private client: Client
 
     /**
      * Create a guild cahce
-     * @param {Client} client
      */
-    constructor (client: Client) {
-        this.client = client;
-    }
+    constructor () {}
 
     /**
      * Add channel ws data into cache
@@ -33,7 +29,7 @@ export class Channels {
      */
     get (id: string): Channel {
         const data = this.#cache.getOne(id);
-        if (data.id) return new Channel(data, this.client)
+        if (data.id) return new Channel(data);
         else throw new Error(`No channel data in cache of id: ${id}`)
     }
 

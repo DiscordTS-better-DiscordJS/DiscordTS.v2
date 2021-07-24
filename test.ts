@@ -1,7 +1,7 @@
 import { TOKEN } from './token.ts';
 
 import {
-    Client, Embed, Permissions
+    Client, Embed, Permissions, CACHE
 } from './mod.ts'
 
 const client = new Client();
@@ -17,6 +17,7 @@ client.on('message', async (m) => {
     console.log(m);
     if (/\?test/gmi.test(m.content)) {
 
+        m.channel.send(`${CACHE.channels.array.length}`);
         m.channel?.send(m.member.nickname);
         
     } else if (/\?ram/gmi.test(m.content)) {

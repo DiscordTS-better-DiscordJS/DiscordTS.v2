@@ -1,4 +1,4 @@
-import { Client } from './Client.ts';
+import { CACHE } from './Client.ts';
 
 /**
  * Class representing Member

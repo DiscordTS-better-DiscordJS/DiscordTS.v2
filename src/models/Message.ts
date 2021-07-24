@@ -1,4 +1,4 @@
-import { Client } from './Client.ts';
+import { CACHE } from './Client.ts';
 import { sendMessage } from '../fetch/methods/message.ts';
 import { Guild } from './Guild.ts';
 import { Embed } from './Embed.ts';
@@ -22,18 +22,15 @@ export class Message {
     pinned: boolean
     mentionEveryone: boolean
 
-    private client: Client
     private readonly guildID: string
     private readonly channelID: string
 
     /**
      *
      * @param {*} data Data from discord gateway
-     * @param {Client} client Client model
      */
-    constructor(data: any, client: Client) {
+    constructor(data: any) {
 
-        this.client = client;
         this.guildID = data.guild_id;
         this.channelID = data.channel_id;
 
@@ -51,15 +48,15 @@ export class Message {
     }
 
     get guild (): Guild {
-        return this.client.guilds.get(this.guildID);
+        return CACHE.guilds.get(this.guildID);
     }
 
     get channel (): Channel {
-        return this.client.channels.get(this.channelID);
+        return CACHE.channels.get(this.channelID);
     }
 
     get member (): Member {
-        return this.client._memebrs.getOne(this.guildID, this.author.id)
+        return CACHE._memebrs.getOne(this.guildID, this.author.id)
     }
 
     /**

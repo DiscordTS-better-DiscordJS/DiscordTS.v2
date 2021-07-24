@@ -1,22 +1,16 @@
 import { Collection } from '../models/Collection.ts';
 import { Guild } from '../models/Guild.ts';
-import { Client } from '../models/Client.ts';
-
 /**
  * Class representing Guilds cache
  */
 export class Guilds {
 
     public cache: Collection<string, Guild> = new Collection()
-    private client: Client
 
     /**
      * Create a guild cahce
-     * @param {Client} client
      */
-    constructor (client: Client) {
-        this.client = client;
-    }
+    constructor () { }
 
     /**
      * Add guild model into cache

@@ -9,7 +9,7 @@ import * as events from '../events/export.ts';
 import { Packet } from '../types/websocket/packet.ts';
 const EVENTS: any = e;
 
-import { Client } from '../models/Client.ts';
+import { Client, CACHE } from '../models/Client.ts';
 import { Guild } from '../models/Guild.ts';
 
 /**
@@ -85,10 +85,9 @@ export class WebSocketManager extends EventEmitter<any> {
 
             this.debugMode && console.log(packet);
             this.emit('raw', packet);
-            this.module(EVENTS[t], d, client).then(() => {})
+            this.module(EVENTS[t], d).then(() => {})
 
             switch (t) {
-
                 case 'READY':
                         this.debugMode && console.log('[WS]: Connected to gateway!');
                         this.emit('ready');
@@ -96,8 +95,8 @@ export class WebSocketManager extends EventEmitter<any> {
                     break;
 
                 case 'GUILD_CREATE':
-                        client.guilds.add = new Guild(d, client);
-                        d.channels.forEach((c: any) => client.channels.add = c);
+                        CACHE.guilds.add = new Guild(d);
+                        d.channels.forEach((c: any) => CACHE.channels.add = c);
                     break;
 
             }
@@ -107,9 +106,9 @@ export class WebSocketManager extends EventEmitter<any> {
     }
 
 
-    private async module (name: string, d: any, client: Client) {
+    private async module (name: string, d: any) {
         if (events && (events as any)[name]) {
-            const res = await (events as any)[name](d, client);
+            const res = await (events as any)[name](d);
             console.log(typeof res);
             if (typeof res !== 'undefined') this.emit(name, res);
             else return;

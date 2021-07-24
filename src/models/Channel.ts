@@ -1,5 +1,5 @@
 import { CHANNEL_TYPES } from '../types/models/channel.ts';
-import { Client } from '../models/Client.ts';
+import { CACHE } from './Client.ts';
 import {Embed} from "./Embed.ts";
 import {messageOptions} from "../types/models/message.ts";
 import {sendMessage} from "../fetch/methods/message.ts";
@@ -21,11 +21,8 @@ export class Channel {
     icon: string
     parentID: string
 
-    private client: Client
+    constructor (data: any) {
 
-    constructor (data: any, client: Client) {
-
-        this.client = client;
         this.id = data.id;
         this.type = channeltypes[data.type];
         this.guildID = data.guild_id;

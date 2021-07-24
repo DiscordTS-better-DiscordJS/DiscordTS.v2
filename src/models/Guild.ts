@@ -1,5 +1,5 @@
 import { guldHashes } from '../types/models/guild.ts';
-import { Client } from '../models/Client.ts';
+import { CACHE } from './Client.ts';
 import { Channel } from './Channel.ts';
 import { Collection } from "./Collection.ts";
 import {Member} from "./Member.ts";
@@ -14,7 +14,6 @@ export class Guild {
     maxMembers: number
     publicUpdateChannelID: string | null
     voiceStates: any[]
-    // emojis: Map<string, any>
     systemChannelFlag: number
     defaultMessageNotifications: string
     splash: any
@@ -28,8 +27,6 @@ export class Guild {
     discoverySplash: any
     unvailable: boolean
     explicitContentFilter: number
-    // roles: I think getter that returns role from cache that i made in future xD
-    channels: Collection<string, Channel>
     ownerID: string
     banner: string
     afkChannelID: string | null
@@ -50,16 +47,12 @@ export class Guild {
     verificatinLevel: number
     // me: Member model from Client
 
-    private client: Client
-
     /**
      * Create Guild model
      * @param {*} data
-     * @param {Client} client
      */
-    constructor (data: any, client: Client) {
+    constructor (data: any) {
 
-        this.client = client;
         this.mfaLevel = data.mfa_level;
         this.presence = data.presence;
         this.systemChannelID = data.system_channel_id;
@@ -97,8 +90,8 @@ export class Guild {
         this.vanityUrlCode = data.vanity_url_code;
         this.threads = data.threads;
 
-        this.channels = new Collection();
-        data.channels.forEach((e: any) => this.channels.set(`${e.id}`, new Channel(e, client)))
+        // this.channels = new Collection();
+        // data.channels.forEach((e: any) => this.channels.set(`${e.id}`, new Channel(e, client)))
         // this.roles
         // this.members
         // this.emojis
