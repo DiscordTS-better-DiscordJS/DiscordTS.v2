@@ -56,7 +56,7 @@ export class Message {
     }
 
     get member (): Member {
-        return CACHE._memebrs.getOne(this.guildID, this.author.id)
+        return CACHE.members.getOne(this.guildID, this.author.id)
     }
 
     /**

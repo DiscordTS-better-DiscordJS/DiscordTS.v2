@@ -1,7 +1,7 @@
 import { TOKEN } from './token.ts';
 
 import {
-    Client, Embed, Permissions, CACHE
+    Client, Embed, Permissions, CACHE, User
 } from './mod.ts'
 
 const client = new Client();

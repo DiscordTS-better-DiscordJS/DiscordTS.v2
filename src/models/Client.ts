@@ -12,7 +12,7 @@ class Options {
 class Cache {
     public guilds!: Guilds
     public channels!: Channels
-    public _memebrs!: Memebrs
+    public members!: Memebrs
 }
 
 const OPTIONS = new Options();
@@ -50,7 +50,7 @@ class Client extends EventsEmitter<Events> {
 
         CACHE.guilds = new Guilds();
         CACHE.channels = new Channels();
-        CACHE._memebrs = new Memebrs();
+        CACHE.members = new Memebrs();
 
         this.ready = false;
 

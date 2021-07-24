@@ -100,5 +100,15 @@ export class Guild {
     // get members (): Member[] {
     //     return this.client._memebrs.getAll(this.id);
     // }
+
+    async fetchMember(ID: string) {
+        if (CACHE.members.has(this.id, ID)) return CACHE.members.getOne(this.id, ID);
+        else {
+            const m = await CACHE.members.fetchAPI(this.id, ID);
+            if (m) {
+                return CACHE.members.getOne(this.id, ID);
+            } else throw new Error(`[Guild Model Error]: ${m}`)
+        }
+    }
 }
 

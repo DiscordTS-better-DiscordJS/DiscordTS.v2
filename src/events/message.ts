@@ -8,11 +8,11 @@ export const _ = async (data: any) => {
         const message = new Message(data);
         const gID = message.guild.id;
         const uID = message.author.id;
-        if (!data.webhook_id && data.author && data.member && !CACHE._memebrs.has(gID, uID)) {
+        if (!data.webhook_id && data.author && data.member && !CACHE.members.has(gID, uID)) {
             if (uID == '671797608750252040') return;
             try {
                 const member = await fetchMember(gID, uID);
-                CACHE._memebrs.addOne(gID, member);
+                CACHE.members.addOne(gID, member);
             } catch {}
 
         }

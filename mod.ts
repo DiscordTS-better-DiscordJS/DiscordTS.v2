@@ -6,6 +6,7 @@ export * from './src/models/Embed.ts';
 export * from './src/models/Channel.ts';
 export * from './src/models/Guild.ts';
 export * from './src/models/Collection.ts';
+export * from './src/models/User.ts';
 export * from './src/models/Permissions/PermissionsBitField.ts';
 export * from './src/models/Permissions/Permissions.ts';
 
