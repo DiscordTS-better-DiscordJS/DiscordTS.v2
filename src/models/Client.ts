@@ -36,6 +36,7 @@ class Client extends EventsEmitter<Events> {
     public ws!: WebSocketManager
     private token!: string
     public options: ClientOptions
+    public ready: boolean
 
     /**
      * Create a Client
@@ -51,6 +52,8 @@ class Client extends EventsEmitter<Events> {
         CACHE.channels = new Channels();
         CACHE._memebrs = new Memebrs();
 
+        this.ready = false;
+
     }
 
     /**
@@ -65,7 +68,14 @@ class Client extends EventsEmitter<Events> {
         try {
             this.ws = await new WebSocketManager(false, token, this);
             Object.values(EVENTS).forEach((event: any) => {
-                this.ws.on(event, (...args) => this.emit(event, ...args));
+                this.ws.on(event, (...args) => {
+                    if (event == 'ready' && !this.ready) {
+                        this.ready = true;
+                        this.emit(event, ...args)
+                    }
+                    else if (event == 'ready' && this.ready) return;
+                    else this.emit(event, ...args)
+                });
             });
         } catch (e) {
             e && console.log(e);

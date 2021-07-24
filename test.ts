@@ -6,12 +6,9 @@ import {
 
 const client = new Client();
 
-// it require heeelpp xDDDD
-// client.on('ready',async () => {
-//     console.log('Gotowy!')
-//     const c = client.channels.get('867134821330059274');
-//     await c.send('Uruchomiłem się!')
-// })
+client.on('ready',async () => {
+    console.log('Gotowy!');
+})
 
 client.on('message', async (m) => {
     console.log(m);

@@ -10,8 +10,11 @@ export const _ = async (data: any) => {
         const uID = message.author.id;
         if (!data.webhook_id && data.author && data.member && !CACHE._memebrs.has(gID, uID)) {
             if (uID == '671797608750252040') return;
-            const member = await fetchMember(gID, uID);
-            CACHE._memebrs.addOne(gID, member);
+            try {
+                const member = await fetchMember(gID, uID);
+                CACHE._memebrs.addOne(gID, member);
+            } catch {}
+
         }
 
         return message;
