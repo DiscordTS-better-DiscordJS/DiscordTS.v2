@@ -40,6 +40,7 @@ class Client extends EventsEmitter<Events> {
     private token!: string
     public options: ClientOptions
     public ready: boolean
+    public ping: number
 
     /**
      * Create a Client
@@ -57,6 +58,7 @@ class Client extends EventsEmitter<Events> {
         CACHE.users = new Users();
 
         this.ready = false;
+        this.ping = 0;
 
     }
 

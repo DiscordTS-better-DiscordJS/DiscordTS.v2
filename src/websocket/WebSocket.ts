@@ -24,6 +24,7 @@ export class WebSocketManager extends EventEmitter<any> {
     private sequence: number
     private sessionID: number
     private heart: any
+    private lastPing: number;
 
     /**
      * Create WebSocket Manager
@@ -39,6 +40,7 @@ export class WebSocketManager extends EventEmitter<any> {
         this.sequence = 0;
         this.sessionID = 0;
         this.socket = new StandardWebSocketClient(LINKS.GATEWAY);
+        this.lastPing = 0;
 
         this.socket.on('open', () => {
             this.debugMode && console.log(`[WS]: WebSocket send 'OPEN'`);
@@ -54,6 +56,11 @@ export class WebSocketManager extends EventEmitter<any> {
 
                 case OPCODES.INVALID_SESSION:
                         throw new Error('[WS]: OPCODE 9, Gateway invalid session.');
+
+                case OPCODES.HEARTBEAT_ACK:
+                    client.ping = (Date.now() - this.lastPing);
+                    console.log(`HEARTBEAT_ACK: ${client.ping}ms`);
+                    break;
 
                 case OPCODES.HELLO:
 
@@ -72,12 +79,6 @@ export class WebSocketManager extends EventEmitter<any> {
                         });
 
                         this.identifyClient(this.token);
-
-                    break;
-
-                case OPCODES.HEARTBEAT_ACK:
-
-                        this.debugMode && console.log('heartbeat_act')
 
                     break;
 
@@ -120,6 +121,8 @@ export class WebSocketManager extends EventEmitter<any> {
      * @param {*} d - D from Discord gateway.
      */
     heartbeat (interval: number, s: any, d: any) {
+        this.lastPing = Date.now();
+        console.log(this.lastPing);
         this.heart = setInterval(() => {
             heartBeat.s = s;
             heartBeat.d = d;

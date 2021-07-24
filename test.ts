@@ -11,7 +11,7 @@ client.on('ready',async () => {
 })
 
 client.on('message', async (m) => {
-    console.log(m);
+
     if (/\?test/gmi.test(m.content)) {
 
         m.channel.send(`${CACHE.channels.array.length}`);

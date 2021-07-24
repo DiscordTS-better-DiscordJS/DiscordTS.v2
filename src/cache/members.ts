@@ -45,7 +45,6 @@ export class Memebrs extends CacheBaseModel<string, any> {
         if (!members.find((m: any) => m.user.id == userID)) return undefined
         else {
             const member = members.find((m: any) => m.user.id == userID);
-            console.log(member)
             return new Member(member, guildID)
         }
     }
