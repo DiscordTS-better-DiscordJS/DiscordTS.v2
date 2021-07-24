@@ -1,25 +1,16 @@
-import { Collection } from '../models/Collection.ts';
+import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { Channel } from '../models/Channel.ts';
-import { Client } from '../models/Client.ts';
 
 /**
  * Class representing Channels cache
  */
-export class Channels {
-
-    #cache: Collection<string, any> = new Collection()
+export class Channels extends CacheBaseModel<string, any> {
 
     /**
      * Create a guild cahce
      */
-    constructor () {}
-
-    /**
-     * Add channel ws data into cache
-     * @param {*} channel - Data from WS
-     */
-    set add (channel: any) {
-        this.#cache.set(channel.id, channel);
+    constructor () {
+        super ();
     }
 
     /**
@@ -28,7 +19,7 @@ export class Channels {
      * @return {Channel} Channel - Returns channel model
      */
     get (id: string): Channel {
-        const data = this.#cache.getOne(id);
+        const data = this.collection.getOne(id);
         if (data.id) return new Channel(data);
         else throw new Error(`No channel data in cache of id: ${id}`)
     }
@@ -39,12 +30,9 @@ export class Channels {
      * @return {boolean}
      */
     has (id: string): boolean {
-        if (this.#cache.has(id)) return true;
+        if (this.collection.has(id)) return true;
         else return false;
     }
 
-    get array (): Channel[] {
-        return this.#cache.array.map(e => e);
-    }
 
 }
