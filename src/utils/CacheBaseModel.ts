@@ -21,4 +21,8 @@ export class CacheBaseModel<indexType, valueType> {
         return this.collection.array;
     }
 
+    get size (): number {
+        return this.collection.array.length;
+    }
+
 }

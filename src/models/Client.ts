@@ -14,6 +14,7 @@ class Cache {
     public channels!: Channels
     public members!: Memebrs
     public users!: Users
+
 }
 
 const OPTIONS = new Options();
