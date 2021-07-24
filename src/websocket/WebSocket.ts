@@ -90,7 +90,6 @@ export class WebSocketManager extends EventEmitter<any> {
             switch (t) {
                 case 'READY':
                         this.debugMode && console.log('[WS]: Connected to gateway!');
-                        this.emit('ready');
                         // there create new User object as client ( when client and user model was done )
                     break;
 
@@ -109,7 +108,6 @@ export class WebSocketManager extends EventEmitter<any> {
     private async module (name: string, d: any) {
         if (events && (events as any)[name]) {
             const res = await (events as any)[name](d);
-            console.log(typeof res);
             if (typeof res !== 'undefined') this.emit(name, res);
             else return;
         }

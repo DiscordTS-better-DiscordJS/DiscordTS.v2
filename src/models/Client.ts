@@ -13,6 +13,7 @@ class Cache {
     public guilds!: Guilds
     public channels!: Channels
     public members!: Memebrs
+    public users!: Users
 }
 
 const OPTIONS = new Options();
@@ -26,6 +27,7 @@ import { Events } from '../types/eventemitter/Events.ts'
 import { Guilds } from '../cache/guilds.ts';
 import { Channels } from '../cache/channels.ts';
 import { Memebrs } from '../cache/members.ts';
+import { Users } from '../cache/users.ts';
 
 /**
  * Class representing a Client.
@@ -51,6 +53,7 @@ class Client extends EventsEmitter<Events> {
         CACHE.guilds = new Guilds();
         CACHE.channels = new Channels();
         CACHE.members = new Memebrs();
+        CACHE.users = new Users();
 
         this.ready = false;
 

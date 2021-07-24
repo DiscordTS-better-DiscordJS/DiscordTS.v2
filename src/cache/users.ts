@@ -20,6 +20,7 @@ export class Users extends CacheBaseModel<string, any> {
      */
     get (id: string): User {
         const data = this.collection.getOne(id);
+        console.log(data);
         if (data.id) return new User(data);
         else throw new Error(`No user data in cache of id: ${id}`)
     }

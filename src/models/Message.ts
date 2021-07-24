@@ -5,6 +5,7 @@ import { Embed } from './Embed.ts';
 import { messageOptions, argsOptions } from '../types/models/message.ts';
 import { Channel } from './Channel.ts';
 import { Member } from './Member.ts';
+import { User } from './User.ts';
 
 /**
  * Message model
@@ -13,7 +14,6 @@ export class Message {
 
     tts: boolean
     type: number
-    author: any // --
     id: string
     content: string
     attachments: any[] // --
@@ -24,6 +24,7 @@ export class Message {
 
     private readonly guildID: string
     private readonly channelID: string
+    private readonly authorID: string
 
     /**
      *
@@ -33,10 +34,10 @@ export class Message {
 
         this.guildID = data.guild_id;
         this.channelID = data.channel_id;
+        this.authorID = data.author.id;
 
         this.type = data.type;
         this.tts = data.tts;
-        this.author = data.author;
         this.id = data.id;
         this.content = data.content;
         this.attachments = data.attachments;
@@ -57,6 +58,10 @@ export class Message {
 
     get member (): Member {
         return CACHE.members.getOne(this.guildID, this.author.id)
+    }
+
+    get author (): User {
+        return CACHE.users.get(this.authorID)
     }
 
     /**

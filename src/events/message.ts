@@ -5,6 +5,9 @@ import { fetchMember } from '../fetch/methods/member.ts';
 export const _ = async (data: any) => {
 
     if (data.type == 0) {
+        if (!CACHE.users.has(data.author.id)) {
+            CACHE.users.add = { id: data.author.id, data: data.author };
+        }
         const message = new Message(data);
         const gID = message.guild.id;
         const uID = message.author.id;
