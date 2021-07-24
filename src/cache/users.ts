@@ -2,9 +2,9 @@ import { Collection } from '../models/Collection.ts';
 import { User } from '../models/User.ts';
 
 /**
- * Class representing Channels cache
+ * Class representing Users cache
  */
-export class Channels {
+export class Users {
 
     #cache: Collection<string, any> = new Collection()
 
