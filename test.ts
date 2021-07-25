@@ -46,6 +46,10 @@ client.on('message', async (m) => {
         }
 
 
+    } else if (/\?avatar/.test(m.content)) {
+
+        return m.reply(new Embed({ image: { url: m.author.avatarURL({ dynamic: true }) } }));
+
     }
 
 
