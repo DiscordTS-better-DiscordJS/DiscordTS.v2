@@ -1,3 +1,5 @@
+import { avatarURLOptions } from '../types/models/user.ts';
+
 /**
  * Class representing User
  */
@@ -32,9 +34,22 @@ export class User {
     /**
      * getter baseAvatarURL
      * @description Get base url as webp with size 2048
+     * @return {string} avatarURL
      */
     get baseAvatarURL (): string {
         return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.webp?size=2048`
+    }
+
+    /**
+     * Get User avatar with custom url options
+     * @param {avatarURLOptions} options
+     * @return {string} avatarURL
+     */
+    avatarURL (options?: avatarURLOptions): string {
+        if (!options) return this.baseAvatarURL;
+        if (!options.dynamic) {
+            return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.${options.type ? options.type : 'webp'}?size=${options.size ? `${options.size}` : '2048'}`
+        } else return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.gif?size=${options.size ? `${options.size}` : '2048'}`;
     }
 
 }
