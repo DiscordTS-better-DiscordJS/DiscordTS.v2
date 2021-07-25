@@ -10,7 +10,7 @@ export interface EmbedOptions {
     description?: string
     url?: string
     timestamp?: Date | string | boolean
-    color?: numbers
+    color?: number
     footer?: {
         text?: string
         icon?: string

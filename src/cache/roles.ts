@@ -35,4 +35,10 @@ export class Roles extends CacheBaseModel<string, any[]> {
         }
     }
 
+    get totalSize (): number {
+        let count: number = 0;
+        this.collection.array.forEach((e: any) => e.forEach((x: any) => ++count));
+        return count;
+    }
+
 }

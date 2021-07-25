@@ -142,9 +142,9 @@ export class Embed {
     /**
      * Update embed color.
      * @description Set new color of embed or set it if not exists.
-     * @param {string | number} color - New color.
+     * @param {number} color - New color of embed as int
      */
-    color (color: string | number) {
+    color (color: number) {
         this.data.color = color;
     }
 
