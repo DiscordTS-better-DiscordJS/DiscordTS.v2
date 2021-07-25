@@ -20,3 +20,5 @@ export * from './src/types/models/user.ts';
 export * from './src/types/permissions/permissions.ts';
 export * from './src/types/permissions/permissionsFlags.ts';
 export * from './src/types/permissions/permissionsEnum.ts';
+
+export * from './src/utils/BetterCommands.ts';

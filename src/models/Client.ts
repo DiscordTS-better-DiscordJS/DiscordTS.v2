@@ -90,9 +90,20 @@ class Client extends EventsEmitter<Events> {
         }
     }
 
+    /**
+     * Get client process memory usage
+     */
     get memoryUsage (): number {
         return parseFloat(((Deno.memoryUsage().rss) / 1024 / 1024).toFixed(2));
     }
+
+    get versions (): { deno: string, typescript: string, DiscordTS: string } {
+        const v = Deno.version;
+        return {
+            deno: v.deno, typescript: v.typescript, DiscordTS: 'Alpha-0.0.1'
+        }
+    }
+
 }
 
 export { OPTIONS, Client, CACHE }
