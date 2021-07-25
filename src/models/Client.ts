@@ -97,10 +97,10 @@ class Client extends EventsEmitter<Events> {
         return parseFloat(((Deno.memoryUsage().rss) / 1024 / 1024).toFixed(2));
     }
 
-    get versions (): { deno: string, typescript: string, DiscordTS: string } {
+    get versions (): { deno: string, typescript: string, DiscordTS: string, v8: string } {
         const v = Deno.version;
         return {
-            deno: v.deno, typescript: v.typescript, DiscordTS: 'Alpha-0.0.1'
+            deno: v.deno, typescript: v.typescript, v8: v.v8, DiscordTS: 'Alpha-0.0.1'
         }
     }
 
