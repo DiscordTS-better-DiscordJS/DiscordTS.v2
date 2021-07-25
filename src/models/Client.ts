@@ -14,6 +14,7 @@ class Cache {
     public channels!: Channels
     public members!: Memebrs
     public users!: Users
+    public roles!: Roles
     get totalCount (): { channels: number, guilds: number, members: number, users: number } {
         return {
             channels: this.channels.size, guilds: this.guilds.size, members: this.members.size,
@@ -35,6 +36,7 @@ import { Channels } from '../cache/channels.ts';
 import { Memebrs } from '../cache/members.ts';
 import { Users } from '../cache/users.ts';
 import { User } from './User.ts';
+import { Roles } from '../cache/roles.ts';
 
 /**
  * Class representing a Client.
@@ -63,6 +65,7 @@ class Client extends EventsEmitter<Events> {
         CACHE.channels = new Channels();
         CACHE.members = new Memebrs();
         CACHE.users = new Users();
+        CACHE.roles = new Roles();
 
         this.ready = false;
         this.ping = 0;

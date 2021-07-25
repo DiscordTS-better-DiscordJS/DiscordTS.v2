@@ -101,6 +101,8 @@ export class WebSocketManager extends EventEmitter<any> {
                 case 'GUILD_CREATE':
                         CACHE.guilds.add = { data: new Guild(d), id: d.id }
                         d.channels.forEach((c: any) => CACHE.channels.add = { data: c, id: c.id });
+                        CACHE.roles.addRoles = { guildID: d.id, guildRoles: d.roles };
+
                     break;
 
             }
