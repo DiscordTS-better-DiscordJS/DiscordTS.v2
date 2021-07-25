@@ -1,3 +1,1 @@
-import {
-
-} from '../mod.ts';
+import * as dts from '../mod.ts';

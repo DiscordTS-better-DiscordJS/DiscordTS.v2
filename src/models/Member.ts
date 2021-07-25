@@ -1,4 +1,6 @@
 import { CACHE } from './Client.ts';
+import { Role } from './Role.ts';
+import { Collection } from './Collection.ts';
 
 /**
  * Class representing Member
@@ -11,6 +13,8 @@ export class Member {
     public deaf: boolean
     public guildID: string
 
+    private _roles: any
+
     /**
      * Create Member
      * @param {*} data
@@ -18,7 +22,8 @@ export class Member {
      */
     constructor (data: any, guildID: string) {
 
-        console.log(data);
+        this._roles = data.roles
+        console.log(data.roles)
 
         this.nickname = data.nick != null ? data.nick : 'none';
         this.joinedAt = data.joined_at || '';
@@ -28,7 +33,16 @@ export class Member {
 
     }
 
-    // get roles
+    /**
+     * Get member roles
+     * @return {Role[]} - Array of member roles
+     */
+    get roles (): Collection<string, Role> {
+        const WS = CACHE.roles.get(this.guildID).filter((r: any) => this._roles.some((filter: any) => filter == r.id))
+        const roles = new Collection<string, Role>();
+        WS.forEach((e: any) => roles.set(e.id, new Role(e)));
+        return roles;
+    }
     // get permissions
     // get user
 
