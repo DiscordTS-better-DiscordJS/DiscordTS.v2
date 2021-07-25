@@ -11,6 +11,7 @@ const EVENTS: any = e;
 
 import { Client, CACHE } from '../models/Client.ts';
 import { Guild } from '../models/Guild.ts';
+import { User } from '../models/User.ts';
 
 /**
  * @name WebSocketManager - Class to manage discord ws
@@ -53,13 +54,14 @@ export class WebSocketManager extends EventEmitter<any> {
             s ? this.sequence = s : 0;
 
             switch (op) {
-
                 case OPCODES.INVALID_SESSION:
                         throw new Error('[WS]: OPCODE 9, Gateway invalid session.');
 
                 case OPCODES.HEARTBEAT_ACK:
-                    client.ping = (Date.now() - this.lastPing);
-                    console.log(`HEARTBEAT_ACK: ${client.ping}ms`);
+                    const latency = Date.now() - this.lastPing;
+                    const ping = new Date(latency).getMilliseconds();
+                    client.ping = ping;
+                    console.log(`HEARTBEAT_ACK: ${ping}ms`);
                     break;
 
                 case OPCODES.HELLO:
@@ -91,7 +93,7 @@ export class WebSocketManager extends EventEmitter<any> {
             switch (t) {
                 case 'READY':
                         this.debugMode && console.log('[WS]: Connected to gateway!');
-                        // there create new User object as client ( when client and user model was done )
+                        client.user = new User(d.user);
                     break;
 
                 case 'GUILD_CREATE':
@@ -122,7 +124,6 @@ export class WebSocketManager extends EventEmitter<any> {
      */
     heartbeat (interval: number, s: any, d: any) {
         this.lastPing = Date.now();
-        console.log(this.lastPing);
         this.heart = setInterval(() => {
             heartBeat.s = s;
             heartBeat.d = d;

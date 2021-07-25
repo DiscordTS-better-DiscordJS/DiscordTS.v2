@@ -29,6 +29,7 @@ import { Guilds } from '../cache/guilds.ts';
 import { Channels } from '../cache/channels.ts';
 import { Memebrs } from '../cache/members.ts';
 import { Users } from '../cache/users.ts';
+import { User } from './User.ts';
 
 /**
  * Class representing a Client.
@@ -41,6 +42,7 @@ class Client extends EventsEmitter<Events> {
     public options: ClientOptions
     public ready: boolean
     public ping: number
+    public user!: User
 
     /**
      * Create a Client

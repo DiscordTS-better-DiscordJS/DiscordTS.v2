@@ -30,7 +30,11 @@ export class User {
     }
 
     /**
-     * todo avatarURL
+     * getter baseAvatarURL
+     * @description Get base url as webp with size 2048
      */
+    get baseAvatarURL (): string {
+        return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.webp?size=2048`
+    }
 
 }
