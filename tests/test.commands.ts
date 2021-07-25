@@ -1,4 +1,4 @@
-import { BetterCommands, Message, Embed } from '../mod.ts';
+import { BetterCommands, Message, Embed, CACHE } from '../mod.ts';
 
 import { client } from './test.ts';
 
@@ -10,6 +10,8 @@ class commands extends BetterCommands<cmd> {
 
     constructor() {
         super();
+
+        CACHE;
 
         this.add = {
             name: 'ram',
