@@ -18,7 +18,7 @@ class Cache {
     get totalCount (): { channels: number, guilds: number, members: number, users: number } {
         return {
             channels: this.channels.size, guilds: this.guilds.size, members: this.members.size,
-            users: this.users.size
+            users: this.users.size, roles: this.roles.size
         }
     }
 }
