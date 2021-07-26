@@ -1,4 +1,5 @@
 import { BetterCommands, Message, Embed, CACHE } from '../mod.ts';
+import { User } from '../src/models/User.ts';
 
 import { client } from './test.ts';
 
@@ -32,7 +33,9 @@ class commands extends BetterCommands<cmd> {
             command: {
                 run: (m, args) => {
 
-                    return m.reply(new Embed({image: {url: m.author.avatarURL({dynamic: true})}}));
+                    const user = new User(CACHE.users.get(args[0]?.replace(/[<@!>]/gim, '') || m.author.id));
+
+                    return m.reply(new Embed({image: {url: user.avatarURL({dynamic: true})}}));
 
                 }
 

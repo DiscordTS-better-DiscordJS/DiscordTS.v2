@@ -18,8 +18,8 @@ export class User {
      * Create a User
      * @param {*} data
      */
-    constructor (data: any) {
-
+    constructor(data: any) {
+        
         this.username = data.username;
         this.discriminator = data.discriminator;
         this.id = data.id;
@@ -47,9 +47,10 @@ export class User {
      */
     avatarURL (options?: avatarURLOptions): string {
         if (!options) return this.baseAvatarURL;
-        if (!options.dynamic) {
-            return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.${options.type ? options.type : 'webp'}?size=${options.size ? `${options.size}` : '2048'}`
-        } else return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.gif?size=${options.size ? `${options.size}` : '2048'}`;
+
+        if (options.dynamic && this.avatar.startsWith('a_')) {
+            return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.gif?size=${options.size ? `${options.size}` : '2048'}`;
+        } else return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.${options.type ? options.type : 'webp'}?size=${options.size ? `${options.size}` : '2048'}`
     }
 
 }
