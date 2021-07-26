@@ -99,10 +99,30 @@ export class Guild {
 
     }
 
-    // get members (): Member[] {
-    //     return this.client._memebrs.getAll(this.id);
+    /**
+     * Get Collection of guild members
+     * @return {Collection<string, Member>} Collection of guild members
+     */
+    // get members (): Collection<string, Member> {
+    //     const members = new Collection<string, Member>();
+    //     CACHE.members.array.forEach((m: any) => members.set((m.id as string), new Member(m, this.id)));
+    //     return members;
     // }
 
+    /**
+     * Get Collection of guild channels
+     * @return {Collection<string, Channel>} Collection of guild channels
+     */
+    get channels (): Collection<string, Channel> {
+        const channels = new Collection<string, Channel>();
+        CACHE.channels.array.filter((c: any) => c.guildID == this.id).forEach((ch: any) => channels.set(ch.id, new Channel(ch)));
+        return channels;
+    }
+
+    /**
+     * Fetch Guild Member
+     * @param {string} ID User ID
+     */
     async fetchMember(ID: string) {
         if (CACHE.members.has(this.id, ID)) return CACHE.members.getOne(this.id, ID);
         else {
@@ -113,6 +133,10 @@ export class Guild {
         }
     }
 
+    /**
+     * Get Client Guild Member
+     * @return {Member} - Client Member
+     */
     get me (): Member {
         return CACHE.members.getOne(this.id, OPTIONS.clientID);
     }

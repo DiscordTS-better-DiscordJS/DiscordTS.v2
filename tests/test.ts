@@ -12,10 +12,10 @@ class bot extends Client {
         this.on('ready', () => console.log('Ready!'));
 
         this.on('message', async (m) => {
-            if (!m.content.startsWith('d@')) return;
+            if (!m.content.startsWith('?')) return;
             if (!m.guild || m.author.bot) return;
 
-            const args = m.args({ prefix: 'd@' });
+            const args = m.args({ prefix: '?' });
 
             if (commands.get(args[0]))  await commands.get(args[0])?.run(m, args.slice(1));
             
