@@ -51,7 +51,7 @@ export class WebSocketManager extends EventEmitter<any> {
             const packet: Packet = JSON.parse(incoming.data);
             const { op, s, t, d } = packet;
 
-            console.log(op, s, t);
+            // console.log(op, s, t);
 
             s ? this.sequence = s : 0;
 

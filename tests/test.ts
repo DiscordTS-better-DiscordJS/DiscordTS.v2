@@ -12,7 +12,6 @@ class bot extends Client {
         this.on('ready', () => console.log('Ready!'));
 
         this.on('message', async (m) => {
-
             if (!m.content.startsWith('?')) return;
             if (!m.guild || m.author.bot) return;
 

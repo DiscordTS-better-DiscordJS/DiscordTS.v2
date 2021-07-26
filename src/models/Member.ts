@@ -26,7 +26,7 @@ export class Member {
     constructor (data: any, guildID: string) {
 
         this._roles = data.roles
-        console.log(data.roles)
+        // console.log(data.roles)
 
         this.nickname = data.nick != null ? data.nick : 'none';
         this.joinedAt = data.joined_at || '';
