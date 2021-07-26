@@ -1,8 +1,8 @@
 import { guldHashes } from '../types/models/guild.ts';
-import { CACHE } from './Client.ts';
+import { CACHE, OPTIONS } from './Client.ts';
 import { Channel } from './Channel.ts';
 import { Collection } from "./Collection.ts";
-import {Member} from "./Member.ts";
+import { Member } from "./Member.ts";
 
 /**
  * Class representing Guild
@@ -45,7 +45,6 @@ export class Guild {
     presence: any[] // future
     systemChannelID: string
     verificatinLevel: number
-    // me: Member model from Client
 
     /**
      * Create Guild model
@@ -95,6 +94,9 @@ export class Guild {
         // this.roles
         // this.members
         // this.emojis
+
+        this.fetchMember(OPTIONS.clientID);
+
     }
 
     // get members (): Member[] {
@@ -110,5 +112,10 @@ export class Guild {
             } else throw new Error(`[Guild Model Error]: ${m}`)
         }
     }
+
+    get me (): Member {
+        return CACHE.members.getOne(this.id, OPTIONS.clientID);
+    }
+
 }
 

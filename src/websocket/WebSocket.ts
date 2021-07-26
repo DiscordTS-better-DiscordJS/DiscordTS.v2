@@ -9,7 +9,7 @@ import * as events from '../events/export.ts';
 import { Packet } from '../types/websocket/packet.ts';
 const EVENTS: any = e;
 
-import { Client, CACHE } from '../models/Client.ts';
+import {Client, CACHE, OPTIONS} from '../models/Client.ts';
 import { Guild } from '../models/Guild.ts';
 import { User } from '../models/User.ts';
 
@@ -96,6 +96,7 @@ export class WebSocketManager extends EventEmitter<any> {
                 case 'READY':
                         this.debugMode && console.log('[WS]: Connected to gateway!');
                         client.user = new User(d.user);
+                        OPTIONS.clientID = d.user.id;
                     break;
 
                 case 'GUILD_CREATE':

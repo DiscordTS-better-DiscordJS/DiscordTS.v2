@@ -2,8 +2,10 @@ class Options {
     token: string
     isBot?: boolean
     appID?: string
+    clientID!: string
     constructor() {
         this.token = '';
+        this.clientID = '';
         this.appID = '';
         this.isBot = true;
     }
