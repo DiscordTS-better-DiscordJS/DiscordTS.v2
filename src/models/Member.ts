@@ -1,6 +1,8 @@
 import { CACHE } from './Client.ts';
 import { Role } from './Role.ts';
 import { Collection } from './Collection.ts';
+import { Permissions } from './Permissions/Permissions.ts';
+import { Guild } from './Guild.ts';
 
 /**
  * Class representing Member
@@ -12,6 +14,7 @@ export class Member {
     public mute: boolean
     public deaf: boolean
     public guildID: string
+    public id: string
 
     private _roles: any
 
@@ -30,6 +33,7 @@ export class Member {
         this.deaf = data.deaf;
         this.mute = data.mute;
         this.guildID = guildID;
+        this.id = data.user.id;
 
     }
 
@@ -43,7 +47,21 @@ export class Member {
         WS.forEach((e: any) => roles.set(e.id, new Role(e)));
         return roles;
     }
-    // get permissions
+
+    /**
+     * Get member guild model
+     */
+    get guild (): Guild {
+        return CACHE.guilds.get(this.guildID);
+    }
+
+    /**
+     * Get member permissions
+     */
+    get permissions (): Permissions {
+        return new Permissions(this.roles.array.map((r: Role) => r.permissions.bitfield));
+    }
+
     // get user
 
 }
