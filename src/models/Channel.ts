@@ -43,11 +43,11 @@ export class Channel {
      * @param {string} content Content of message
      * @description Send message to channel
      */
-    async send (content: string | Embed | messageOptions){
+    async send (content: string | Embed | messageOptions) {
         let msg: any = {};
         if (typeof content == 'string') msg = { content };
         else if (content instanceof Embed) {
-            msg = { embeds: [content.data], content: "" };
+            msg = { embeds: [content.data], content: '' };
         } else {
             content.embed ? msg.embeds = [content.embed.data] : null;
             content.tts ? msg.tts = true : msg.tts = false;
