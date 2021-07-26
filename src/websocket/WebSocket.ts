@@ -19,7 +19,7 @@ import { User } from '../models/User.ts';
 export class WebSocketManager extends EventEmitter<any> {
 
     private readonly debugMode: boolean
-    private readonly token: string
+    #token: string = '';
     private isReconnect: boolean
     public socket: WebSocketClient
     private sequence: number
@@ -36,7 +36,7 @@ export class WebSocketManager extends EventEmitter<any> {
     constructor(isReconnect: boolean, token: string, client: Client) {
         super();
         this.debugMode = false;
-        this.token = token;
+        this.#token = token;
         this.isReconnect = isReconnect;
         this.sequence = 0;
         this.sessionID = 0;
@@ -75,14 +75,14 @@ export class WebSocketManager extends EventEmitter<any> {
 
                         this.socket.on('close', () => {
                             clearInterval(this.heart);
-                            new WebSocketManager(false, this.token, client);
+                            new WebSocketManager(false, this.#token, client);
                         });
 
                         this.socket.on('error', (e: any) => {
                             this.debugMode && console.log(`[WS ERROR]: ${e}`)
                         });
 
-                        this.identifyClient(this.token);
+                        this.identifyClient(this.#token);
 
                     break;
 

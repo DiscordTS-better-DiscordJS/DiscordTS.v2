@@ -47,7 +47,6 @@ import { Roles } from '../cache/roles.ts';
 class Client extends EventsEmitter<Events> {
 
     public ws!: WebSocketManager
-    private token!: string
     public options: ClientOptions
     public ready: boolean
     public ping: number
@@ -79,7 +78,6 @@ class Client extends EventsEmitter<Events> {
      * @param {string} token
      */
     async connect (token: string) {
-        this.token = token;
         OPTIONS.token = token;
         OPTIONS.isBot = this.options.bot;
         OPTIONS.appID = this.options.appID;
