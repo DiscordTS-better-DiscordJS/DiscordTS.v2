@@ -55,7 +55,7 @@ class commands extends BetterCommands<cmd> {
                     try {
                         const ev = eval(args.join(" "));
                         return m.channel.send(new Embed({
-                            description: `\`\`\`${JSON.stringify(ev)}\`\`\``
+                            description: `\`\`\`js\n${Deno.inspect(ev)}\`\`\``
                         }))
 
                     } catch (e) {
