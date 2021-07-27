@@ -69,7 +69,7 @@ export class Member {
      * @return {boolean}
      */
     get kickable (): boolean {
-        return this.permissions.has('KICK_MEMBERS', true);
+        return !this.permissions.has('KICK_MEMBERS', true);
     }
 
     /**
@@ -77,7 +77,7 @@ export class Member {
      * @return {boolean}
      */
     get bannable (): boolean {
-        return this.permissions.has('BAN_MEMBERS', true)
+        return !this.permissions.has('BAN_MEMBERS', true)
     }
 
     get user (): User {
