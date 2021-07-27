@@ -68,6 +68,25 @@ class commands extends BetterCommands<cmd> {
             }
         }
 
+        this.add = {
+            name: 'perms',
+            command: {
+                run: async (m, args) => {
+
+                    await m.reply(new Embed({
+                        color: 0x696969,
+                        fields: [
+                            { name: 'Kickable', value: `${m.member.kickable}` },
+                            { name: 'Bannable', value: `${m.member.bannable}` },
+                            { name: 'Admin', value: `${m.member.permissions.has('ADMINISTRATOR')}` },
+                            { name: 'rolesCount', value: `${m.member.roles.size}` }
+                        ]
+                    }))
+
+                }
+            }
+        }
+
     }
 }
 

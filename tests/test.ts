@@ -1,5 +1,5 @@
 import { TOKEN } from '../token.ts';
-import { Client, ClientOptions } from '../mod.ts';
+import { Client, ClientOptions, Embed } from '../mod.ts';
 
 import commands from './test.commands.ts';
 
@@ -18,7 +18,7 @@ class bot extends Client {
             const args = m.args({ prefix: '?' });
 
             if (commands.get(args[0]))  await commands.get(args[0])?.run(m, args.slice(1));
-            
+
         })
 
         this.connect(TOKEN);
