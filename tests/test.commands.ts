@@ -46,14 +46,14 @@ class commands extends BetterCommands<cmd> {
         this.add = {
             name: 'eval',
             command: {
-                run: (m, args) => {
+                run: async (m, args) => {
 
                     const devs = ['395266229436153868', '375247025643716609'];
 
                     if (!devs.some(d => d == m.author.id)) return m.reply('Nie dla psa! To dla pana XD');
 
                     try {
-                        const ev = eval(args.join(" "));
+                        const ev = await eval(args.join(" "));
                         return m.channel.send(new Embed({
                             description: `\`\`\`js\n${Deno.inspect(ev)}\`\`\``
                         }))
