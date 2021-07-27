@@ -4,6 +4,8 @@ import { Channel } from './Channel.ts';
 import { Collection } from "./Collection.ts";
 import { Member } from "./Member.ts";
 
+import { modifyCurrentUserNick } from '../fetch/methods/member.ts';
+
 /**
  * Class representing Guild
  */
@@ -140,6 +142,31 @@ export class Guild {
     get me (): Member {
         return CACHE.members.getOne(this.id, OPTIONS.clientID);
     }
+
+    /**
+     * Change client guild member nickname
+     * @param {string} newNickname - New nickname
+     * @return {Promise<boolean>} Returns true when success.
+     */
+    async setClientNick (newNickname: string): Promise<boolean> {
+        if (this.me.permissions.has('CHANGE_NICKNAME')) {
+            await modifyCurrentUserNick(this.id, newNickname);
+            return true;
+        } else return false;
+
+    }
+
+    /**
+     * Clear (set) client guild member nickname to client user username
+     * @return {Promise<boolean>>} Returns true when success
+     */
+    async clearClientNick (): Promise<boolean> {
+        if (this.me.permissions.has('CHANGE_NICKNAME')) {
+            await modifyCurrentUserNick(this.id, this.me.user.username);
+            return true;
+        } else return false;
+    }
+
 
 }
 

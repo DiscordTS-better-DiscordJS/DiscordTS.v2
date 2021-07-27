@@ -98,6 +98,7 @@ export class WebSocketManager extends EventEmitter<any> {
                 case 'READY':
                         this.debugMode && console.log('[WS]: Connected to gateway!');
                         client.user = new User(d.user);
+                        CACHE.users.add = { id: d.user.id, data: d.user };
                         OPTIONS.clientID = d.user.id;
                         this.readyAt = ~~(Date.now() / 100);
                     break;

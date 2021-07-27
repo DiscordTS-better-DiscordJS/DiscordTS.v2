@@ -11,3 +11,15 @@ export const fetchMember = async (guildID: string, userID: string): Promise<any>
     else throw new Error(`[fetchMember]: Invalid member ID ${userID} in guild id ${guildID}`);
 
 }
+
+export const modifyCurrentUserNick = async (guildID: string, newNickname: string) => {
+
+    const res = await FETCH({
+        url: `/guilds/${guildID}/members/@me/nick`,
+        method: 'PATCH',
+        body: {
+            nick: newNickname
+        }
+    });
+
+}
