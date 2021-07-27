@@ -26,6 +26,7 @@ export class WebSocketManager extends EventEmitter<any> {
     private sessionID: number
     private heart: any
     private lastPing: number;
+    public readyAt: number;
 
     /**
      * Create WebSocket Manager
@@ -42,6 +43,7 @@ export class WebSocketManager extends EventEmitter<any> {
         this.sessionID = 0;
         this.socket = new StandardWebSocketClient(LINKS.GATEWAY);
         this.lastPing = 0;
+        this.readyAt = 0;
 
         this.socket.on('open', () => {
             this.debugMode && console.log(`[WS]: WebSocket send 'OPEN'`);
@@ -97,6 +99,7 @@ export class WebSocketManager extends EventEmitter<any> {
                         this.debugMode && console.log('[WS]: Connected to gateway!');
                         client.user = new User(d.user);
                         OPTIONS.clientID = d.user.id;
+                        this.readyAt = ~~(Date.now() / 100);
                     break;
 
                 case 'GUILD_CREATE':

@@ -3,6 +3,7 @@ import { Role } from './Role.ts';
 import { Collection } from './Collection.ts';
 import { Permissions } from './Permissions/Permissions.ts';
 import { Guild } from './Guild.ts';
+import { User } from './User.ts';
 
 /**
  * Class representing Member
@@ -26,7 +27,6 @@ export class Member {
     constructor (data: any, guildID: string) {
 
         this._roles = data.roles
-        // console.log(data.roles)
 
         this.nickname = data.nick != null ? data.nick : 'none';
         this.joinedAt = data.joined_at || '';
@@ -50,6 +50,7 @@ export class Member {
 
     /**
      * Get member guild model
+     * @return {Guild} Member Guild model
      */
     get guild (): Guild {
         return CACHE.guilds.get(this.guildID);
@@ -57,11 +58,30 @@ export class Member {
 
     /**
      * Get member permissions
+     * @return {Permissions} Member permissions model
      */
     get permissions (): Permissions {
         return new Permissions(this.roles.array.map((r: Role) => r.permissions.bitfield));
     }
 
-    // get user
+    /**
+     * Check member kickable
+     * @return {boolean}
+     */
+    get kickable (): boolean {
+        return this.permissions.has('KICK_MEMBERS', true);
+    }
+
+    /**
+     * Check member bannable
+     * @return {boolean}
+     */
+    get bannable (): boolean {
+        return this.permissions.has('BAN_MEMBERS', true)
+    }
+
+    get user (): User {
+        return CACHE.users.get(this.id);
+    }
 
 }
