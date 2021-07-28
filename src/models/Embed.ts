@@ -24,7 +24,7 @@ export class Embed {
         this.#options.type ? this.data.type = this.#options.type : 'rich';
         this.#options.description ? this.data.description = this.#options.description : null;
         this.#options.url ? this.data.url = this.#options.url : null;
-        if (this.#options.timestamp){
+        if (this.#options.timestamp) {
             if (typeof this.#options.timestamp == 'boolean' && this.#options.timestamp) this.data.timestamp = new Date();
             else this.data.timestamp = this.#options.timestamp;
         }

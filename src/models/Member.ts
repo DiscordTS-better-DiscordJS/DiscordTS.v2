@@ -42,7 +42,7 @@ export class Member {
      * @return {Role[]} - Array of member roles
      */
     get roles (): Collection<string, Role> {
-        const WS = CACHE.roles.get(this.guildID).filter((r: any) => this.#_roles.some((filter: any) => filter == r.id))
+        const WS = CACHE.roles.get(this.guildID).filter((r: any) => this.#_roles.some((filter: any) => filter == r.id));
         const roles = new Collection<string, Role>();
         WS.forEach((e: any) => roles.set(e.id, new Role(e)));
         return roles;

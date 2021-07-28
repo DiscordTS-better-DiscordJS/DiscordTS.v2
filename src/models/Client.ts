@@ -90,10 +90,10 @@ class Client extends EventsEmitter<Events> {
                 this.ws.on(event, (...args) => {
                     if (event == 'ready' && !this.ready) {
                         this.ready = true;
-                        this.emit(event, ...args)
+                        this.emit(event, ...args);
                     }
                     else if (event == 'ready' && this.ready) return;
-                    else this.emit(event, ...args)
+                    else this.emit(event, ...args);
                 });
             });
         } catch (e) {

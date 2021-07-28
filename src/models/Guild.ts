@@ -43,7 +43,7 @@ export class Guild {
     preferredLocale: string
     region: string
     id: string
-    vanityUrlCode: any // idk
+    vanityUrlCode: string | null // idk
     presence: any[] // future
     systemChannelID: string
     verificatinLevel: number

@@ -53,9 +53,9 @@ export class Messages extends CacheBaseModel<string, any> {
      */
     getOne (guildID: string, messageID: string): Message | any {
         const messages = this.collection.get(guildID);
-        if (!messages.find((m: any) => m.user.id == messageID)) return undefined;
+        if (!messages.find((m: any) => m.user?.id == messageID)) return undefined;
         else {
-            const message = messages.find((m: any) => m.user.id == messageID);
+            const message = messages.find((m: any) => m.user?.id == messageID);
             return new Message(message);
         }
     }
@@ -79,7 +79,7 @@ export class Messages extends CacheBaseModel<string, any> {
 
     get totalSize (): number {
         let count: number = 0;
-        this.collection.array.forEach((e: any) => e.forEach((x: any) => ++count));
+        this.collection.array.forEach((e: any) => e.forEach(() => ++count));
         return count;
     }
 
