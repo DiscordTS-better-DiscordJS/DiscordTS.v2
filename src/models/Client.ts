@@ -41,6 +41,7 @@ import { Users } from '../cache/users.ts';
 import { User } from './User.ts';
 import { Roles } from '../cache/roles.ts';
 import { Messages } from '../cache/messages.ts';
+import { version } from '../../mod.ts';
 
 /**
  * Class representing a Client.
@@ -111,7 +112,7 @@ class Client extends EventsEmitter<Events> {
     get versions (): { deno: string, typescript: string, DiscordTS: string, v8: string } {
         const v = Deno.version;
         return {
-            deno: v.deno, typescript: v.typescript, v8: v.v8, DiscordTS: 'Alpha-0.0.2'
+            deno: v.deno, typescript: v.typescript, v8: v.v8, DiscordTS: version
         }
     }
 
