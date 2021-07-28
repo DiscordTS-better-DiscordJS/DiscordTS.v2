@@ -1,6 +1,6 @@
 import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { Message } from '../models/Message.ts';
-import api from '../fetch/Api.ts';
+import { api } from '../fetch/Api.ts';
 
 /**
  * Class representing Message cache model

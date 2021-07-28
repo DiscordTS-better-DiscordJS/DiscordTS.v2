@@ -1,6 +1,6 @@
 import { Message } from '../models/Message.ts';
 import { CACHE } from  '../models/Client.ts';
-import api from '../fetch/Api.ts';
+import { api } from '../fetch/Api.ts';
 
 export const _ = async (data: any) => {
 

@@ -2,7 +2,7 @@ import { CHANNEL_TYPES } from '../types/models/channel.ts';
 import { CACHE } from './Client.ts';
 import { Embed } from "./Embed.ts";
 import { messageOptions } from "../types/models/message.ts";
-import api from '../fetch/Api.ts';
+import { api } from '../fetch/Api.ts';
 import { Collection } from './Collection.ts';
 import { Message } from './Message.ts';
 

@@ -1,5 +1,5 @@
 import { CACHE } from './Client.ts';
-import api from '../fetch/Api.ts';
+import { api } from '../fetch/Api.ts';
 import { Guild } from './Guild.ts';
 import { Embed } from './Embed.ts';
 import { messageOptions, argsOptions } from '../types/models/message.ts';

@@ -3,8 +3,7 @@ import { CACHE, OPTIONS } from './Client.ts';
 import { Channel } from './Channel.ts';
 import { Collection } from "./Collection.ts";
 import { Member } from "./Member.ts";
-
-import api from '../fetch/Api.ts';
+import { api } from '../fetch/Api.ts';
 
 /**
  * Class representing Guild
