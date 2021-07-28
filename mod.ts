@@ -1,5 +1,5 @@
 export * from './src/websocket/WebSocket.ts';
-export * from './src/fetch/Api.ts';
+export * as api from './src/fetch/Api.ts';
 
 export * from './src/models/Client.ts';
 export * from './src/models/Message.ts'

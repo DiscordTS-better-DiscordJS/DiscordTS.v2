@@ -1,4 +1,4 @@
-import { BetterCommands, Message, Embed, CACHE } from '../mod.ts';
+import { BetterCommands, Message, Embed, CACHE, Api } from '../mod.ts';
 import { User } from '../src/models/User.ts';
 
 import { client } from './test.ts';
