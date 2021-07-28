@@ -1,4 +1,5 @@
 import { BitFieldResolvable } from '../../types/permissions/permissions.ts';
+import { DiscordTSError } from '../../utils/DiscordTSError.ts';
 
 export class PermissionsBitField {
 
@@ -31,7 +32,7 @@ export class PermissionsBitField {
         // if (bit instanceof PermissionsBitField) return this.bitfield;
         if (Array.isArray(bit)) return bit.map(p => this.resolve(p, flags)).reduce((prev, p) => prev | p, 0);
         if (typeof bit === 'string' && typeof flags[bit] !== 'undefined') return flags[bit];
-        else throw new Error('[PermissionsBitField]: Invalid BitField.');
+        else throw new DiscordTSError('PermissionsBitField', 'Invalid BitField.');
     }
 
 }

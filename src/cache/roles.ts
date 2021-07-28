@@ -1,5 +1,6 @@
 import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { Role } from '../models/Role.ts';
+import { DiscordTSError } from '../utils/DiscordTSError.ts';
 
 /**
  * Class representing Role cache
@@ -31,7 +32,7 @@ export class Roles extends CacheBaseModel<string, any[]> {
             const role = roles?.find(r => r.id == roleID);
             return new Role(role);
         } catch (e) {
-            throw new Error(`[Roles cache Error]: ${e}`);
+            throw new DiscordTSError('Roles cache', `${e}`);
         }
     }
 

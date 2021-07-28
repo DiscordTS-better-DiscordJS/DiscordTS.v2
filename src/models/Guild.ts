@@ -4,6 +4,7 @@ import { Channel } from './Channel.ts';
 import { Collection } from "./Collection.ts";
 import { Member } from "./Member.ts";
 import { api } from '../fetch/Api.ts';
+import { DiscordTSError } from '../utils/DiscordTSError.ts';
 
 /**
  * Class representing Guild
@@ -130,7 +131,7 @@ export class Guild {
             const m = await CACHE.members.fetchAPI(this.id, ID);
             if (m) {
                 return CACHE.members.getOne(this.id, ID);
-            } else throw new Error(`[Guild Model Error]: ${m}`)
+            } else throw new DiscordTSError('Guild model', `${m}`)
         }
     }
 

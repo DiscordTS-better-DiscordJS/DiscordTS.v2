@@ -1,5 +1,6 @@
 import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { User } from '../models/User.ts';
+import { DiscordTSError } from '../utils/DiscordTSError.ts';
 
 /**
  * Class representing Users cache
@@ -21,7 +22,7 @@ export class Users extends CacheBaseModel<string, any> {
     get (id: string): User {
         const data = this.collection.getOne(id);
         if (data?.id) return new User(data);
-        else throw new Error(`No user data in cache of id: ${id}`)
+        else throw new DiscordTSError('users cache', `No user data in cache of id: ${id}`)
     }
 
     /**

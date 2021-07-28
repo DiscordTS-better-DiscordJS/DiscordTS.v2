@@ -1,6 +1,6 @@
 import { EventEmitter } from 'https://deno.land/x/event@2.0.0/mod.ts';
 import { WebSocketClient, StandardWebSocketClient } from 'https://deno.land/x/websocket@v0.1.2/mod.ts';
-
+import { DiscordTSError } from '../utils/DiscordTSError.ts';
 import { LINKS } from './links.ts';
 import { OPCODES } from "./opcodes.ts";
 import { EVENTS as e } from "./websocketEvents.ts";
@@ -59,7 +59,7 @@ export class WebSocketManager extends EventEmitter<any> {
 
             switch (op) {
                 case OPCODES.INVALID_SESSION:
-                        throw new Error('[WS]: OPCODE 9, Gateway invalid session.');
+                        throw new DiscordTSError('WebSocket', 'OPCODE 9, Gateway invalid session.');
 
                 case OPCODES.HEARTBEAT_ACK:
                     const latency = Date.now() - this.lastPing;

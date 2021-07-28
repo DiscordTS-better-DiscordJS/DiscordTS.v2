@@ -1,4 +1,5 @@
 import { FETCH } from '../fetch.ts';
+import { DiscordTSError } from '../../utils/DiscordTSError.ts';
 
 export const fetchMember = async (guildID: string, userID: string): Promise<any> => {
 
@@ -8,7 +9,7 @@ export const fetchMember = async (guildID: string, userID: string): Promise<any>
     });
 
     if (res.user) return res;
-    else throw new Error(`[fetchMember]: Invalid member ID ${userID} in guild id ${guildID}`);
+    else throw new DiscordTSError('API fetchMember', `Invalid member ID ${userID} in guild id ${guildID}`);
 
 }
 

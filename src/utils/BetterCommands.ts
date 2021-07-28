@@ -1,4 +1,5 @@
 import { Collection } from '../models/Collection.ts';
+import { DiscordTSError } from './DiscordTSError.ts';
 
 /**
  * Class representing BetterCommands utility
@@ -24,7 +25,7 @@ export class BetterCommands<CommandInterface> {
         try {
             this.commands.set(data.name, data.command);
         } catch (e) {
-            throw new Error(`[BetterCommands Error]: ${e}`);
+            throw new DiscordTSError('BetterCommands', `${e}`);
         }
 
     }

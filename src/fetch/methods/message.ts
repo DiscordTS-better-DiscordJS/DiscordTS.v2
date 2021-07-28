@@ -1,4 +1,5 @@
 import { FETCH } from '../fetch.ts';
+import { DiscordTSError } from '../../utils/DiscordTSError.ts';
 
 export const sendMessage = async (content: any, channelID: string) => {
     return await FETCH({
@@ -16,6 +17,6 @@ export const fetchMessage = async (channelID: string, messageID: string) => {
     });
 
     if (res.content) return res;
-    else throw new Error(`[fetchMessage]: Invalid message ID ${messageID} in channel ID ${channelID}`);
+    else throw new DiscordTSError('API fetchMessage', `Invalid message ID ${messageID} in channel ID ${channelID}`);
 
 }
