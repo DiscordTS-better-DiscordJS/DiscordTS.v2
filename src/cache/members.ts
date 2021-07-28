@@ -1,6 +1,6 @@
 import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { Member } from '../models/Member.ts';
-import { fetchMember } from '../fetch/methods/member.ts';
+import api from '../fetch/Api.ts';
 
 /**
  * Class representing Members cache
@@ -31,7 +31,7 @@ export class Memebrs extends CacheBaseModel<string, any> {
 
     async fetchAPI (guildID: string, userID: string): Promise<boolean> {
         try {
-            const member = await fetchMember(guildID, userID);
+            const member = await api.member.fetchMember(guildID, userID);
             await this.addOne(guildID, member);
             return true;
         } catch (e) {

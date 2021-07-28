@@ -1,6 +1,6 @@
 import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { Message } from '../models/Message.ts';
-import { fetchMessage } from "../fetch/methods/message.ts";
+import api from '../fetch/Api.ts';
 
 /**
  * Class representing Message cache model
@@ -68,7 +68,7 @@ export class Messages extends CacheBaseModel<string, any> {
      */
     async fetchAPI (channelID: string, messageID: string): Promise<boolean> {
         try {
-            const message = await fetchMessage(channelID, messageID);
+            const message = await api.message.fetchMessage(channelID, messageID);
             await this.addOne(channelID, message);
             return true;
         } catch (e) {

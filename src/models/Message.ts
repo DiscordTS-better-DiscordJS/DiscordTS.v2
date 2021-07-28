@@ -1,5 +1,5 @@
 import { CACHE } from './Client.ts';
-import { sendMessage } from '../fetch/methods/message.ts';
+import api from '../fetch/Api.ts';
 import { Guild } from './Guild.ts';
 import { Embed } from './Embed.ts';
 import { messageOptions, argsOptions } from '../types/models/message.ts';
@@ -88,7 +88,7 @@ export class Message {
             guild_id: this.guild.id
         };
 
-        return sendMessage(msg, msg.message_reference.channel_id);
+        return api.message.sendMessage(msg, msg.message_reference.channel_id);
     }
 
     /**

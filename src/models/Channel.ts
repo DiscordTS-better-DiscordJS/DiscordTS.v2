@@ -2,7 +2,7 @@ import { CHANNEL_TYPES } from '../types/models/channel.ts';
 import { CACHE } from './Client.ts';
 import { Embed } from "./Embed.ts";
 import { messageOptions } from "../types/models/message.ts";
-import { sendMessage } from "../fetch/methods/message.ts";
+import api from '../fetch/Api.ts';
 import { Collection } from './Collection.ts';
 import { Message } from './Message.ts';
 
@@ -70,7 +70,7 @@ export class Channel {
 
         msg.tts = false;
 
-        return sendMessage(msg, this.id);
+        return api.message.sendMessage(msg, this.id);
     }
 
 }

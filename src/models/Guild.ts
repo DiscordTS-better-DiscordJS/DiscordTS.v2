@@ -4,7 +4,7 @@ import { Channel } from './Channel.ts';
 import { Collection } from "./Collection.ts";
 import { Member } from "./Member.ts";
 
-import { modifyCurrentUserNick } from '../fetch/methods/member.ts';
+import api from '../fetch/Api.ts';
 
 /**
  * Class representing Guild
@@ -150,7 +150,7 @@ export class Guild {
      */
     async setClientNick (newNickname: string): Promise<boolean> {
         if (this.me.permissions.has('CHANGE_NICKNAME')) {
-            await modifyCurrentUserNick(this.id, newNickname);
+            await api.member.modifyCurrentUserNick(this.id, newNickname);
             return true;
         } else return false;
 
@@ -162,7 +162,7 @@ export class Guild {
      */
     async clearClientNick (): Promise<boolean> {
         if (this.me.permissions.has('CHANGE_NICKNAME')) {
-            await modifyCurrentUserNick(this.id, this.me.user.username);
+            await api.member.modifyCurrentUserNick(this.id, this.me.user.username);
             return true;
         } else return false;
     }
