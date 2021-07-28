@@ -53,9 +53,9 @@ export class Messages extends CacheBaseModel<string, any> {
      */
     getOne (guildID: string, messageID: string): Message | any {
         const messages = this.collection.get(guildID);
-        if (!messages.find((m: any) => m.user?.id == messageID)) return undefined;
+        if (!messages.find((m: any) => m.id == messageID)) return undefined;
         else {
-            const message = messages.find((m: any) => m.user?.id == messageID);
+            const message = messages.find((m: any) => m.id == messageID);
             return new Message(message);
         }
     }
