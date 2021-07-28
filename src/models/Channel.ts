@@ -1,9 +1,13 @@
 import { CHANNEL_TYPES } from '../types/models/channel.ts';
 import { CACHE } from './Client.ts';
-import {Embed} from "./Embed.ts";
-import {messageOptions} from "../types/models/message.ts";
-import {sendMessage} from "../fetch/methods/message.ts";
+import { Embed } from "./Embed.ts";
+import { messageOptions } from "../types/models/message.ts";
+import { sendMessage } from "../fetch/methods/message.ts";
+import { Collection } from './Collection.ts';
+import { Message } from './Message.ts';
+
 const channeltypes: any = CHANNEL_TYPES
+
 /**
  * Class representing Channel
  */
@@ -25,7 +29,7 @@ export class Channel {
 
         this.id = data.id;
         this.type = channeltypes[data.type];
-        this.guildID = data.guild_id;
+        this.guildID = data.guildID;
         this.position = data.position;
         this.name = data.name;
         this.topic = data.topic;
@@ -35,6 +39,16 @@ export class Channel {
         this.parentID = data.parent_id;
 
 
+    }
+
+    /**
+     * Get channel messages
+     * @return {Collection<string, Message>}
+     */
+    get messages (): Collection<string, Message> {
+        const messages = new Collection<string, Message>();
+        CACHE.messages.getAll(this.guildID).forEach((m: Message) => messages.set(m.id, m));
+        return messages
     }
 
     /**
