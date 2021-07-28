@@ -111,7 +111,7 @@ class Client extends EventsEmitter<Events> {
     get versions (): { deno: string, typescript: string, DiscordTS: string, v8: string } {
         const v = Deno.version;
         return {
-            deno: v.deno, typescript: v.typescript, v8: v.v8, DiscordTS: 'Alpha-0.0.1'
+            deno: v.deno, typescript: v.typescript, v8: v.v8, DiscordTS: 'Alpha-0.0.2'
         }
     }
 
