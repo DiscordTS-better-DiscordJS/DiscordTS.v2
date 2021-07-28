@@ -148,8 +148,9 @@ export class WebSocketManager extends EventEmitter<any> {
      * @param {string} token - Bot's token.
      */
     identifyClient (token: string) {
-        switch (this.isReconnect) {
-            case true:
+        try {
+            switch (this.isReconnect) {
+                case true:
                     this.socket?.send(JSON.stringify({
                         op: 6,
                         d: {
@@ -157,13 +158,17 @@ export class WebSocketManager extends EventEmitter<any> {
                             session_id: this.sessionID
                         }
                     }));
-                break;
+                    break;
 
-            case false:
-                identify.d.token = token;
+                case false:
+                    identify.d.token = token;
                     this.socket?.send(JSON.stringify(identify));
-                break;
+                    break;
+            }
+        } catch (e) {
+            throw new DiscordTSError('identifyClient', `${e}`);
         }
+
     }
 
 }

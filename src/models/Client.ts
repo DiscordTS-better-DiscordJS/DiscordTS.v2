@@ -41,7 +41,7 @@ import { Users } from '../cache/users.ts';
 import { User } from './User.ts';
 import { Roles } from '../cache/roles.ts';
 import { Messages } from '../cache/messages.ts';
-import { version } from '../../mod.ts';
+import { version, DiscordTSError } from '../../mod.ts';
 
 /**
  * Class representing a Client.
@@ -82,11 +82,17 @@ class Client extends EventsEmitter<Events> {
      * @param {string} token
      */
     async connect (token: string) {
+        if (!token) throw new DiscordTSError('connect', 'Token required');
         OPTIONS.token = token;
         OPTIONS.isBot = this.options.bot;
         OPTIONS.appID = this.options.appID;
         try {
-            this.ws = await new WebSocketManager(false, token, this);
+            try {
+                this.ws = await new WebSocketManager(false, token, this);
+            } catch (er) {
+                throw new DiscordTSError('connect', `${er}`)
+            }
+
             Object.values(EVENTS).forEach((event: any) => {
                 this.ws.on(event, (...args) => {
                     if (event == 'ready' && !this.ready) {
