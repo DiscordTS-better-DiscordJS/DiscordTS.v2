@@ -17,10 +17,11 @@ class Cache {
     public members!: Memebrs
     public users!: Users
     public roles!: Roles
-    get totalCount (): { channels: number, guilds: number, members: number, users: number, roles: number } {
+    public messages!: Messages
+    get totalCount (): { channels: number, guilds: number, members: number, users: number, roles: number, messages: number } {
         return {
-            channels: this.channels.size, guilds: this.guilds.size, members: this.members.size,
-            users: this.users.size, roles: this.roles.totalSize
+            channels: this.channels.size, guilds: this.guilds.size, members: this.members.totalSize,
+            users: this.users.size, roles: this.roles.totalSize, messages: this.messages.totalSize
         }
     }
 }
@@ -39,6 +40,7 @@ import { Memebrs } from '../cache/members.ts';
 import { Users } from '../cache/users.ts';
 import { User } from './User.ts';
 import { Roles } from '../cache/roles.ts';
+import { Messages } from '../cache/messages.ts';
 
 /**
  * Class representing a Client.
@@ -67,6 +69,7 @@ class Client extends EventsEmitter<Events> {
         CACHE.members = new Memebrs();
         CACHE.users = new Users();
         CACHE.roles = new Roles();
+        CACHE.messages = new Messages();
 
         this.ready = false;
         this.ping = 0;

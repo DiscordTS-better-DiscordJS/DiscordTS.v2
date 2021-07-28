@@ -48,5 +48,11 @@ export class Memebrs extends CacheBaseModel<string, any> {
             return new Member(member, guildID)
         }
     }
+
+    get totalSize (): number {
+        let count: number = 0;
+        this.collection.array.forEach((e: any) => e.forEach((x: any) => ++count));
+        return count;
+    }
     
 }

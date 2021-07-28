@@ -20,6 +20,7 @@ export const _ = async (data: any) => {
 
         }
 
+        CACHE.messages.addOne(gID, data);
         return message;
     }
     return undefined;
