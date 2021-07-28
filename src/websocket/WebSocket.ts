@@ -49,6 +49,10 @@ export class WebSocketManager extends EventEmitter<any> {
             this.debugMode && console.log(`[WS]: WebSocket send 'OPEN'`);
         });
 
+        this.socket.on('error', (e) => {
+            throw new DiscordTSError('WebSocket', `${e}`);
+        });
+
         this.socket.on('message', async (incoming: any) => {
             const packet: Packet = JSON.parse(incoming.data);
             const { op, s, t, d } = packet;
