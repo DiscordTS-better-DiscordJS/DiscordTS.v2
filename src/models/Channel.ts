@@ -51,6 +51,17 @@ export class Channel {
         return messages
     }
 
+
+    /**
+     * Change channel name
+     * @param {string} newName - New channel name
+     * @return {boolean} - If success then returns payload
+     */
+    async setName (newName: string): Promise<boolean | any> {
+        return await api.channels.modifyChannel(this.id, { name: newName });
+    }
+
+
     /**
      * Send message to channel
      * @async
