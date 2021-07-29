@@ -28,6 +28,8 @@ export * from './src/types/models/guild.ts';
 export * from './src/types/models/embed.ts';
 export * from './src/types/models/message.ts';
 export * from './src/types/models/user.ts';
+export * from './src/types/fetch/updateUtil.ts';
+export * from './src/types/fetch/fetch.ts';
 
 export * from './src/types/permissions/permissions.ts';
 export * from './src/types/permissions/permissionsFlags.ts';
