@@ -86,7 +86,6 @@ export class Message {
     async delete (): Promise<boolean | Message> {
         if (!this.guild.me.permissions.has('MANAGE_MESSAGES')) throw new DiscordTSError('deleteMessage', `Client require permission MANAGE_MESSAGES to delete message on guild ID ${this.guildID}`);
         const res = await api.message.deleteMessage(this.channelID, this.id);
-        console.log(res)
         if (!res) return this
         else return true
     }
