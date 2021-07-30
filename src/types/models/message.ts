@@ -11,3 +11,10 @@ export interface argsOptions {
     prefix?: string
     includeCommandName?: boolean
 }
+
+export interface messageEdit {
+    content: string
+    embedes: Embed[]
+    // flags
+    // components: []
+}

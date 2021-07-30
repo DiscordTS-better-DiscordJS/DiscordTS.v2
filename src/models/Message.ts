@@ -2,7 +2,7 @@ import { CACHE } from './Client.ts';
 import { api } from '../fetch/Api.ts';
 import { Guild } from './Guild.ts';
 import { Embed } from './Embed.ts';
-import { messageOptions, argsOptions } from '../types/models/message.ts';
+import { messageOptions, argsOptions, messageEdit } from '../types/models/message.ts';
 import { Channel } from './Channel.ts';
 import { Member } from './Member.ts';
 import { User } from './User.ts';
@@ -62,6 +62,18 @@ export class Message {
 
     get author (): User {
         return CACHE.users.get(this.authorID)
+    }
+
+    /**
+     * Edit message
+     * @param {messageEdit} editData
+     */
+    async edit (editData: messageEdit): Promise<boolean | any> {
+
+        let d: any = editData;
+
+        return api.message.modifyMessage(this.channelID, this.id, d);
+
     }
 
     /**

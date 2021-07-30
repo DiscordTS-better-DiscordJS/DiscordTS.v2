@@ -64,13 +64,13 @@ export class Messages extends CacheBaseModel<string, any> {
      * Fetch api for message
      * @param {string} channelID
      * @param {string} messageID
-     * @return {boolean}
+     * @return {*}
      */
-    async fetchAPI (channelID: string, messageID: string): Promise<boolean> {
+    async fetchAPI (channelID: string, messageID: string): Promise<any> {
         try {
             const message = await api.message.fetchMessage(channelID, messageID);
             await this.addOne(channelID, message);
-            return true;
+            return message;
         } catch (e) {
             return e;
         }
