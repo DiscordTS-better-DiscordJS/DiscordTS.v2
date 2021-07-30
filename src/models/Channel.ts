@@ -1,10 +1,11 @@
-import { CHANNEL_TYPES } from '../types/models/channel.ts';
+import { CHANNEL_TYPES, channelEdit } from '../types/models/channel.ts';
 import { CACHE } from './Client.ts';
 import { Embed } from "./Embed.ts";
 import { messageOptions } from "../types/models/message.ts";
 import { api } from '../fetch/Api.ts';
 import { Collection } from './Collection.ts';
 import { Message } from './Message.ts';
+import { DiscordTSError } from '../utils/DiscordTSError.ts';
 
 const channeltypes: any = CHANNEL_TYPES
 
@@ -24,6 +25,7 @@ export class Channel {
     bitrare: number
     icon: string
     parentID: string
+    coolDown: number
 
     constructor (data: any) {
 
@@ -37,6 +39,7 @@ export class Channel {
         this.bitrare = data.bitrare;
         this.icon = data.icon;
         this.parentID = data.parent_id;
+        this.coolDown = data.rate_limit_per_user;
 
 
     }
@@ -54,11 +57,18 @@ export class Channel {
 
     /**
      * Change channel name
-     * @param {string} newName - New channel name
+     * @param {channelEdit} editData - Channel edit data
      * @return {boolean} - If success then returns payload
      */
-    async setName (newName: string): Promise<boolean | any> {
-        return await api.channels.modifyChannel(this.id, { name: newName });
+    async edit (editData: channelEdit): Promise<boolean | any> {
+
+        if (editData.name && editData.name.length > 100) throw new DiscordTSError('channelEdit', '1-100 character channel name');
+        if (editData.topic && editData.topic.length > 1024) throw new DiscordTSError('channelEdit', '0-1024 character channel topic');
+        if (editData.coolDown && editData.coolDown > 21600 || editData.coolDown < 0) throw new DiscordTSError('channelEdit', 'amount of seconds a user has to wait before sending another message (0-21600)');
+        if (editData.coolDown && (this.type != CHANNEL_TYPES["0"] || editData.type !== CHANNEL_TYPES["0"])) throw new DiscordTSError('channelEdit', 'Cooldown you can change only on Text channel');
+        if (editData.voiceChannelUsersLimit && editData.voiceChannelUsersLimit > 99 || editData.voiceChannelUsersLimit < 0) throw new DiscordTSError('channelEdit', '\tthe user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user limit');
+
+        return await api.channels.modifyChannel(this.id, editData);
     }
 
 
