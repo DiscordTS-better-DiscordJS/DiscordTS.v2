@@ -21,7 +21,7 @@ export class Channels extends CacheBaseModel<string, any> {
      */
     get (id: string): Channel {
         const data = this.collection.getOne(id);
-        if (data.id) return new Channel(data);
+        if (data?.id) return new Channel(data);
         else throw new DiscordTSError('channels cache', `No channel data in cache of id: ${id}`)
     }
 

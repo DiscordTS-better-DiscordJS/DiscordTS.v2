@@ -1,6 +1,7 @@
 import { CACHE } from '../../models/Client.ts';
 import { UpdateUtil } from './updateUtil.ts'
 import { DiscordTSError } from '../../utils/DiscordTSError.ts';
+import { FETCH } from '../fetch.ts';
 
 export const modifyChannel = async (channelID: string, updateData: any) => {
 
@@ -15,3 +16,10 @@ export const modifyChannel = async (channelID: string, updateData: any) => {
     else return update;
 
 }
+
+export const deleteChannel = async (channelID: string) => {
+    return await FETCH({
+        url: `/channels/${channelID}`,
+        method: 'DELETE'
+    })
+};

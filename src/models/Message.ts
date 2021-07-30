@@ -19,7 +19,7 @@ export class Message {
     content: string
     attachments: any[] // --
     createdTimestamp: number
-    createAt: Date;
+    createdAt: Date;
     editedTimestamp: Date | null
     pinned: boolean
     mentionEveryone: boolean
@@ -44,10 +44,10 @@ export class Message {
         this.content = data.content;
         this.attachments = data.attachments;
         this.createdTimestamp = new Date(data.timestamp).getTime();
+        this.createdAt = data.timestamp;
         this.editedTimestamp = data.editedTimestamp;
         this.pinned = data.pinned;
         this.mentionEveryone = data.mentionEveryone;
-        this.createAt = data.timestamp;
 
     }
 

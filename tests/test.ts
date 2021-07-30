@@ -17,7 +17,7 @@ class bot extends Client {
 
             const args = m.args({ prefix: PREFIX });
 
-            if (commands.get(args[0]))  await commands.get(args[0])?.run(m, args.slice(1));
+            if (commands.get(args[0]))  await commands.get(args[0])?.run(m, args.slice(PREFIX.length));
 
         })
 

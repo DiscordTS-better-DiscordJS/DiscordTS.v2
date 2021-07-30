@@ -75,6 +75,22 @@ export class Channel {
         return await api.channels.modifyChannel(this.id, d);
     }
 
+    /**
+     * 
+     * @param {channelID} string 
+     * @returns {Promise<boolean | Channel>}
+     */
+
+    async delete (): Promise<boolean | Channel> {
+       const guild = CACHE.guilds.get(this.guildID);
+
+        if (!guild.me.permissions.has('MANAGE_CHANNELS') || !guild.me.permissions.has('MANAGE_THREADS')) throw new DiscordTSError('deleteChannel', `Client require permission MANAGE_CHANNELS and MANAGE_THREADS to delete channel on guild ID ${this.guildID}`);
+
+       const res = await api.channels.deleteChannel(this.id);
+       if (!res) return this;
+       else return true;
+    }
+
 
     /**
      * Send message to channel
