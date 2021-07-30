@@ -11,8 +11,9 @@ import { User } from './User.ts';
 export class Member {
 
     public nickname: string
-    public joinedAt: string
+    public joinedAt: Date
     public mute: boolean
+    public joinedTimestamp: number
     public deaf: boolean
     public guildID: string
     public id: string
@@ -30,6 +31,7 @@ export class Member {
 
         this.nickname = data.nick != null ? data.nick : 'none';
         this.joinedAt = data.joined_at || '';
+        this.joinedTimestamp = new Date(this.joinedAt).getTime() || 0
         this.deaf = data.deaf;
         this.mute = data.mute;
         this.guildID = guildID;

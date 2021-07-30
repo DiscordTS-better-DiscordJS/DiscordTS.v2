@@ -15,7 +15,7 @@ export const fetchMember = async (guildID: string, userID: string): Promise<any>
 
 export const modifyCurrentUserNick = async (guildID: string, newNickname: string) => {
 
-    const res = await FETCH({
+    return await FETCH({
         url: `/guilds/${guildID}/members/@me/nick`,
         method: 'PATCH',
         body: {

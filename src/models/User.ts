@@ -19,6 +19,7 @@ export class User {
      * @param {*} data
      */
     constructor(data: any) {
+
         
         this.username = data.username;
         this.discriminator = data.discriminator;

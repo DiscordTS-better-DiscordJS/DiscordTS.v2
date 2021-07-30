@@ -150,8 +150,7 @@ export class Guild {
      */
     async setClientNick (newNickname: string): Promise<boolean> {
         if (this.me.permissions.has('CHANGE_NICKNAME')) {
-            await api.member.modifyCurrentUserNick(this.id, newNickname);
-            return true;
+            return api.member.modifyCurrentUserNick(this.id, newNickname);
         } else return false;
 
     }
@@ -162,8 +161,7 @@ export class Guild {
      */
     async clearClientNick (): Promise<boolean> {
         if (this.me.permissions.has('CHANGE_NICKNAME')) {
-            await api.member.modifyCurrentUserNick(this.id, this.me.user.username);
-            return true;
+            return await api.member.modifyCurrentUserNick(this.id, this.me.user.username);
         } else return false;
     }
 
