@@ -43,3 +43,10 @@ export const fetchMessage = async (channelID: string, messageID: string) => {
     else throw new DiscordTSError('API fetchMessage', `Invalid message ID ${messageID} in channel ID ${channelID}`);
 
 }
+
+export const deleteMessage = async (channelID: string, messageID: string) => {
+    return await FETCH({
+        url: `/channels/${channelID}/messages/${messageID}`,
+        method: 'DELETE'
+    })
+}

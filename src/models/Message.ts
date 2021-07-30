@@ -6,6 +6,7 @@ import { messageOptions, argsOptions, messageEdit } from '../types/models/messag
 import { Channel } from './Channel.ts';
 import { Member } from './Member.ts';
 import { User } from './User.ts';
+import { DiscordTSError } from "../utils/DiscordTSError.ts";
 
 /**
  * Message model
@@ -17,7 +18,8 @@ export class Message {
     id: string
     content: string
     attachments: any[] // --
-    createdTimestamp: Date
+    createdTimestamp: number
+    createAt: Date;
     editedTimestamp: Date | null
     pinned: boolean
     mentionEveryone: boolean
@@ -41,10 +43,11 @@ export class Message {
         this.id = data.id;
         this.content = data.content;
         this.attachments = data.attachments;
-        this.createdTimestamp = data.timestamp;
+        this.createdTimestamp = new Date(data.timestamp).getTime();
         this.editedTimestamp = data.editedTimestamp;
         this.pinned = data.pinned;
         this.mentionEveryone = data.mentionEveryone;
+        this.createAt = data.timestamp;
 
     }
 
@@ -74,6 +77,18 @@ export class Message {
 
         return api.message.modifyMessage(this.channelID, this.id, d);
 
+    }
+
+    /**
+     * Delete this message.
+     * @return {Promise<boolean>}
+     */
+    async delete (): Promise<boolean | Message> {
+        if (!this.guild.me.permissions.has('MANAGE_MESSAGES')) throw new DiscordTSError('deleteMessage', `Client require permission MANAGE_MESSAGES to delete message on guild ID ${this.guildID}`);
+        const res = await api.message.deleteMessage(this.channelID, this.id);
+        console.log(res)
+        if (!res) return this
+        else return true
     }
 
     /**
