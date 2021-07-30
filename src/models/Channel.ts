@@ -25,7 +25,7 @@ export class Channel {
     bitrare: number
     icon: string
     parentID: string
-    coolDown: number
+    cooldown: number
 
     constructor (data: any) {
 
@@ -39,7 +39,7 @@ export class Channel {
         this.bitrare = data.bitrare;
         this.icon = data.icon;
         this.parentID = data.parent_id;
-        this.coolDown = data.rate_limit_per_user;
+        this.cooldown = data.rate_limit_per_user;
 
 
     }
