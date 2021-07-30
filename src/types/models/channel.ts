@@ -24,7 +24,7 @@ export interface channelEdit {
     postions: number
     topic: string
     nsfw: boolean
-    coolDown: number
+    cooldown: number
     voiceChannelUsersLimit: number
     parentID: string
     rtcRegion: string

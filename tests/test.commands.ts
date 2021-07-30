@@ -49,7 +49,7 @@ class commands extends BetterCommands<cmd> {
             command: {
                 run: async (m, args) => {
 
-                    const devs = ['395266229436153868', '375247025643716609'];
+                    const devs = ['395266229436153868', '375247025643716609', '493119070032363541'];
 
                     if (!devs.some(d => d == m.author.id)) return m.reply('Nie dla psa! To dla pana XD');
 

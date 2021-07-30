@@ -62,13 +62,17 @@ export class Channel {
      */
     async edit (editData: channelEdit): Promise<boolean | any> {
 
+        editData.type = editData.type ? editData.type : this.type
+
         if (editData.name && editData.name.length > 100) throw new DiscordTSError('channelEdit', '1-100 character channel name');
         if (editData.topic && editData.topic.length > 1024) throw new DiscordTSError('channelEdit', '0-1024 character channel topic');
-        if (editData.coolDown && editData.coolDown > 21600 || editData.coolDown < 0) throw new DiscordTSError('channelEdit', 'amount of seconds a user has to wait before sending another message (0-21600)');
-        if (editData.coolDown && (this.type != CHANNEL_TYPES["0"] || editData.type !== CHANNEL_TYPES["0"])) throw new DiscordTSError('channelEdit', 'Cooldown you can change only on Text channel');
+        if (editData.cooldown && editData.cooldown > 21600 || editData.coolDown < 0) throw new DiscordTSError('channelEdit', 'amount of seconds a user has to wait before sending another message (0-21600)');
+        if (editData.cooldown && editData.type !== 'GUILD_TEXT') throw new DiscordTSError('channelEdit', 'Cooldown you can change only on Text channel');
         if (editData.voiceChannelUsersLimit && editData.voiceChannelUsersLimit > 99 || editData.voiceChannelUsersLimit < 0) throw new DiscordTSError('channelEdit', '\tthe user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user limit');
 
-        return await api.channels.modifyChannel(this.id, editData);
+        const d: any = editData;
+        if (editData.cooldown) d.rate_limit_per_user = editData.cooldown;
+        return await api.channels.modifyChannel(this.id, d);
     }
 
 
