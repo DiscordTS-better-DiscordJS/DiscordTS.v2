@@ -66,7 +66,7 @@ export class Channel {
 
         if (editData.name && editData.name.length > 100) throw new DiscordTSError('channelEdit', '1-100 character channel name');
         if (editData.topic && editData.topic.length > 1024) throw new DiscordTSError('channelEdit', '0-1024 character channel topic');
-        if (editData.cooldown && editData.cooldown > 21600 || editData.coolDown < 0) throw new DiscordTSError('channelEdit', 'amount of seconds a user has to wait before sending another message (0-21600)');
+        if (editData.cooldown && editData.cooldown > 21600 || editData.cooldown < 0) throw new DiscordTSError('channelEdit', 'amount of seconds a user has to wait before sending another message (0-21600)');
         if (editData.cooldown && editData.type !== 'GUILD_TEXT') throw new DiscordTSError('channelEdit', 'Cooldown you can change only on Text channel');
         if (editData.voiceChannelUsersLimit && editData.voiceChannelUsersLimit > 99 || editData.voiceChannelUsersLimit < 0) throw new DiscordTSError('channelEdit', '\tthe user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user limit');
 

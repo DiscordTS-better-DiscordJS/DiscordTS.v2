@@ -20,7 +20,7 @@ export enum ChannelTypesEnum {
 
 export interface channelEdit {
     name: string
-    type: 'Text' | 'News'
+    type: 'Text' | 'News' | string
     postions: number
     topic: string
     nsfw: boolean
