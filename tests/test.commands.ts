@@ -93,7 +93,7 @@ class commands extends BetterCommands<cmd> {
             command: {
                 run: async (m, args) => {
 
-                    if (!m.member.permissions.has('MANAGE_MESSAGES')) return m.reply('Nie masz uprawnien.');
+                    if (!m.member.permissions.has('ADMINISTRATOR') || !m.member.permissions.has('BAN_MEMBERS') || !m.member.permissions.has("MANAGE_MESSAGES")) return m.reply('Nie masz uprawnien.');
 
                     const message = m.channel.messages.get(args[0]);
                     if (!message) return m.reply('Nie ma takiej wiadomosci.');
