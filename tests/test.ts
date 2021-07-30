@@ -1,4 +1,4 @@
-import { TOKEN } from '../token.ts';
+import { TOKEN, PREFIX } from '../token.ts';
 import { Client, ClientOptions, Embed } from '../mod.ts';
 
 import commands from './test.commands.ts';
@@ -12,10 +12,10 @@ class bot extends Client {
         this.on('ready', () => console.log('Ready!'));
 
         this.on('message', async (m) => {
-            if (!m.content.startsWith('?')) return;
+            if (!m.content.startsWith(PREFIX)) return;
             if (!m.guild || m.author.bot) return;
 
-            const args = m.args({ prefix: '?' });
+            const args = m.args({ prefix: PREFIX });
 
             if (commands.get(args[0]))  await commands.get(args[0])?.run(m, args.slice(1));
 

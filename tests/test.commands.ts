@@ -88,6 +88,23 @@ class commands extends BetterCommands<cmd> {
             }
         }
 
+        this.add = {
+            name: 'delete',
+            command: {
+                run: async (m, args) => {
+
+                    if (!m.member.permissions.has('MANAGE_MESSAGES')) return m.reply('Nie masz uprawnien.');
+
+                    const message = m.channel.messages.get(args[0]);
+                    if (!message) return m.reply('Nie ma takiej wiadomosci.');
+
+                    await message.delete();
+                    m.channel.send('Pomyslnie usunieto.');
+
+                }
+            }
+        }
+
     }
 }
 
