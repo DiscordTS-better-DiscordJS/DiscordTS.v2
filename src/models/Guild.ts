@@ -146,9 +146,9 @@ export class Guild {
     /**
      * Change client guild member nickname
      * @param {string} newNickname - New nickname
-     * @return {Promise<boolean>} Returns true when success.
+     * @return {Promise<boolean | any>} Returns true when success.
      */
-    async setClientNick (newNickname: string): Promise<boolean> {
+    async setClientNick (newNickname: string): Promise<boolean | any> {
         if (this.me.permissions.has('CHANGE_NICKNAME')) {
             return api.member.modifyCurrentUserNick(this.id, newNickname);
         } else return false;
@@ -157,9 +157,9 @@ export class Guild {
 
     /**
      * Clear (set) client guild member nickname to client user username
-     * @return {Promise<boolean>>} Returns true when success
+     * @return {Promise<boolean | any>>} Returns true when success
      */
-    async clearClientNick (): Promise<boolean> {
+    async clearClientNick (): Promise<boolean | any> {
         if (this.me.permissions.has('CHANGE_NICKNAME')) {
             return await api.member.modifyCurrentUserNick(this.id, this.me.user.username);
         } else return false;
