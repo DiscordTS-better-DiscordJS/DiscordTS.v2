@@ -255,7 +255,7 @@ export class Embed {
         this.data.author ? null : this.data.author = {};
         if (author?.name) this.data.author.name = author.name;
         if (author?.url) this.data.author.url = author.url;
-        if (author?.iconUrl) this.data.author.iconUrl = author.url;
+        if (author?.iconUrl) this.data.author.iconUrl = author.iconUrl;
         if (author?.proxyIconUrl) this.data.author.proxyIconUrl = author.proxyIconUrl;
     }
 

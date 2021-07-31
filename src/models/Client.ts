@@ -110,6 +110,7 @@ class Client extends EventsEmitter<Events> {
 
     /**
      * Get client process memory usage
+     * @returns number
      */
     get memoryUsage (): number {
         return parseFloat(((Deno.memoryUsage().rss) / 1024 / 1024).toFixed(2));

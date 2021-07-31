@@ -4,7 +4,7 @@
  * @authors Mateusz#4711 & dejwidson#0001 & kacperrrooo#8907
  * @git https://github.com/DiscordTS-better-DiscordJS/DiscordTS.v2
  */
-export const version = 'Alpha-0.0.7b';
+export const version = 'Alpha-0.0.8';
 
 export * from './src/websocket/WebSocket.ts';
 export * from './src/fetch/Api.ts';

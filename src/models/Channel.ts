@@ -76,7 +76,6 @@ export class Channel {
     }
 
     /**
-     * 
      * @param {channelID} string 
      * @returns {Promise<boolean | Channel>}
      */
@@ -112,6 +111,15 @@ export class Channel {
         msg.tts = false;
 
         return api.message.sendMessage(msg, this.id);
+    }
+
+    /**
+     * @returns {string} Mention of channel
+     * @description Make channel mention from channel model
+     */
+
+    get mention (): string {
+        return `<#${this.id}>`
     }
 
 }
