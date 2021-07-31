@@ -7,6 +7,7 @@ import { Channel } from './Channel.ts';
 import { Member } from './Member.ts';
 import { User } from './User.ts';
 import { DiscordTSError } from "../utils/DiscordTSError.ts";
+import { Snowflake } from '../utils/ConvertSnwoflake.ts';
 
 /**
  * Message model
@@ -51,18 +52,30 @@ export class Message {
 
     }
 
+    /**
+     * Get message guild model
+     */
     get guild (): Guild {
         return CACHE.guilds.get(this.guildID);
     }
 
+    /**
+     * Get message channel model
+     */
     get channel (): Channel {
         return CACHE.channels.get(this.channelID);
     }
 
+    /**
+     * Get member model
+     */
     get member (): Member {
         return CACHE.members.getOne(this.guildID, this.author.id)
     }
 
+    /**
+     * Get message author user model
+     */
     get author (): User {
         return CACHE.users.get(this.authorID)
     }

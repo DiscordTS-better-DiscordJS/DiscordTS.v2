@@ -1,4 +1,5 @@
 import { avatarURLOptions } from '../types/models/user.ts';
+import { Snowflake } from '../utils/ConvertSnwoflake.ts';
 
 /**
  * Class representing User
@@ -39,6 +40,11 @@ export class User {
      */
     get baseAvatarURL (): string {
         return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.webp?size=2048`
+
+    }
+
+    get createdAt (): Date {
+        return new Snowflake().decode(this.id).createdAt;
     }
 
     /**
