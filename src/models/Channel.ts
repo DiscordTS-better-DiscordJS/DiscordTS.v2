@@ -95,7 +95,7 @@ export class Channel {
     /**
      * Send message to channel
      * @async
-     * @param {string} content Content of message
+     * @param {string | Embed | messageOptions} content Content of message
      * @description Send message to channel
      */
     async send (content: string | Embed | messageOptions) {
