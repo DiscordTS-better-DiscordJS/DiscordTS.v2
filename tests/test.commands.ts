@@ -1,4 +1,4 @@
-import { BetterCommands, Message, Embed, CACHE, api } from '../mod.ts';
+import { BetterCommands, Message, Embed, CACHE, api, Snowflake } from '../mod.ts';
 import { User } from '../src/models/User.ts';
 
 import { client } from './test.ts';
@@ -14,6 +14,7 @@ class commands extends BetterCommands<cmd> {
 
         CACHE;
         api;
+        new Snowflake()
 
         this.add = {
             name: 'ram',
