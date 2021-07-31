@@ -13,18 +13,18 @@ export interface EmbedOptions {
     color?: number
     footer?: {
         text?: string
-        icon?: string
-        proxyIcon?: string
+        icon_url?: string
+        proxy_icon_url?: string
     }
     image?: {
         url?: string
-        proxyUrl?: string
+        proxy_url?: string
         height?: number
         width?: number
     }
     thumbnail?: {
         url?: string
-        proxyUrl?: string
+        proxy_url?: string
         height?: number
         width?: number
     }
@@ -40,8 +40,8 @@ export interface EmbedOptions {
     author?: {
         name?: string
         url?: string
-        iconUrl?: string
-        proxyIconUrl?: string
+        icon_url?: string
+        proxy_icon_url?: string
     }
     field?: field
     fields?: Array<field>

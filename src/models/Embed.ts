@@ -32,19 +32,19 @@ export class Embed {
         if (this.#options.footer) {
             this.data.footer = {};
             this.#options.footer?.text ? this.data.footer.text = this.#options.footer?.text : null;
-            this.#options.footer?.icon ? this.data.footer.icon = this.#options.footer?.icon : null;
+            this.#options.footer?.icon_url ? this.data.footer.icon_url = this.#options.footer?.icon_url : null;
         }
         if (this.#options.image) {
             this.data.image = {};
             this.#options.image?.url ? this.data.image.url = this.#options.image.url : null;
-            this.#options.image?.proxyUrl ? this.data.image.proxyUrl = this.#options.image.proxyUrl : null;
+            this.#options.image?.proxy_url ? this.data.image.proxy_url = this.#options.image.proxy_url : null;
             this.#options.image?.height ? this.data.image.height = this.#options.image.height : null;
             this.#options.image?.width ? this.data.image.width = this.#options.image.width : null;
         }
         if (this.#options.thumbnail) {
             this.data.thumbnail = {};
             this.#options.thumbnail?.url ? this.data.thumbnail.url = this.#options.thumbnail.url : null;
-            this.#options.thumbnail?.proxyUrl ? this.data.thumbnail.proxyUrl = this.#options.thumbnail.proxyUrl : null;
+            this.#options.thumbnail?.proxy_url ? this.data.thumbnail.proxy_url = this.#options.thumbnail.proxy_url : null;
             this.#options.thumbnail?.height ? this.data.thumbnail.height = this.#options.thumbnail.height : null;
             this.#options.thumbnail?.width ? this.data.thumbnail.width = this.#options.thumbnail.width : null;
         }
@@ -63,8 +63,8 @@ export class Embed {
             this.data.author = {};
             this.#options.author?.name ? this.data.author.name = this.#options.author.name : null;
             this.#options.author?.url ? this.data.author.url = this.#options.author.url : null;
-            this.#options.author?.iconUrl ? this.data.author.iconUrl = this.#options.author.iconUrl : null;
-            this.#options.author?.proxyIconUrl ? this.data.author.proxyIconUrl = this.#options.author.proxyIconUrl : null;
+            this.#options.author?.icon_url ? this.data.author.icon_url = this.#options.author.icon_url : null;
+            this.#options.author?.proxy_icon_url ? this.data.author.proxy_icon_url = this.#options.author.proxy_icon_url : null;
         }
         if (this.#options.field) {
             this.data.fields?.push(this.#options.field);
@@ -158,9 +158,9 @@ export class Embed {
      */
     footer (footer: EmbedOptions['footer']) {
         this.data.footer ? null : this.data.footer = {};
-        if (footer?.icon) this.data.footer.icon = footer.icon;
+        if (footer?.icon_url) this.data.footer.icon_url = footer.icon_url;
         if (footer?.text) this.data.footer.text = footer.text;
-        if (footer?.proxyIcon) this.data.footer.proxyIcon = footer.proxyIcon;
+        if (footer?.proxy_icon_url) this.data.footer.proxy_icon_url = footer.proxy_icon_url;
     }
 
     /**
@@ -192,7 +192,7 @@ export class Embed {
     image (image: EmbedOptions['image']) {
         this.data.image ? null : this.data.image = {};
         if (image?.url) this.data.image.url = image.url;
-        if (image?.proxyUrl) this.data.image.proxyUrl = image.proxyUrl;
+        if (image?.proxy_url) this.data.image.proxy_url = image.proxy_url;
         if (image?.height) this.data.image.height = image.height;
         if (image?.width) this.data.image.width = image.width;
     }
@@ -209,7 +209,7 @@ export class Embed {
     thumbnail (thumbnail: EmbedOptions['thumbnail']) {
         this.data.thumbnail ? null : this.data.thumbnail = {};
         if (thumbnail?.url) this.data.thumbnail.url = thumbnail.url;
-        if (thumbnail?.proxyUrl) this.data.thumbnail.proxyUrl = thumbnail.proxyUrl;
+        if (thumbnail?.proxy_url) this.data.thumbnail.proxy_url = thumbnail.proxy_url;
         if (thumbnail?.width) this.data.thumbnail.width = thumbnail.width;
         if (thumbnail?.height) this.data.thumbnail.height = thumbnail.height;
     }
@@ -255,8 +255,8 @@ export class Embed {
         this.data.author ? null : this.data.author = {};
         if (author?.name) this.data.author.name = author.name;
         if (author?.url) this.data.author.url = author.url;
-        if (author?.iconUrl) this.data.author.iconUrl = author.iconUrl;
-        if (author?.proxyIconUrl) this.data.author.proxyIconUrl = author.proxyIconUrl;
+        if (author?.icon_url) this.data.author.icon_url = author.icon_url;
+        if (author?.proxy_icon_url) this.data.author.proxy_icon_url = author.proxy_icon_url;
     }
 
 }
