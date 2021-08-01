@@ -1,6 +1,7 @@
 # DiscordTS.v2
 ![Stars](https://img.shields.io/github/stars/DiscordTS-better-DiscordJS/DiscordTS.v2)
 ![Licence](https://img.shields.io/github/license/DiscordTS-better-DiscordJS/DiscordTS.v2)
+## _[Discord Support](https://discord.gg/dscts)_
 ___
 <p>A deno library for interaction with Discord API, version 2.</p>
 
@@ -71,3 +72,4 @@ export default new client();
 * Start client process
     > deno run --allow-net ./index.ts
     * If you use ShardsManager, use `--allow-read` flag.
+    
