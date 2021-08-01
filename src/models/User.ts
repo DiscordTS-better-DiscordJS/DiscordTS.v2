@@ -36,15 +36,27 @@ export class User {
     /**
      * getter baseAvatarURL
      * @description Get base url as webp with size 2048
-     * @return {string} avatarURL
+     * @returns {string} avatarURL
      */
     get baseAvatarURL (): string {
         return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.webp?size=2048`
 
     }
 
+    /**
+     * @description Return Date of account creation
+     * @returns {Date}
+     */
     get createdAt (): Date {
         return new Snowflake().decode(this.id).createdAt;
+    }
+
+    /**
+     * @description Returns timestamp of account creation
+     * @returns {number}
+     */
+    get createdTimestamp(): number {
+        return new Date(new Snowflake().decode(this.id).createdAt).getTime();
     }
 
     /**
