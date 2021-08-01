@@ -4,12 +4,26 @@
 ___
 <p>A deno library for interaction with Discord API, version 2.</p>
 
+#Download
+→ [Link do Deno Land biblioteki](https//google.pl) ←
+
 ___
-Simple example
+Simple import example
+```typescript
+// export.ts
+export * from 'there link but now we dont have'; 
+```
+```typescript
+// your project file
+import { somethink } from '../export.ts';
+```
+
+___
+Simple Client example
 ```typescript
 // Import
 import { TOKEN } from '../token.ts';
-import { Client, ClientOptions, Embed } from '../mod.ts';
+import { Client, ClientOptions, Embed } from '../export.ts';
 import commands from './test.commands.ts';
 
 // Declare class extends Client model
@@ -46,3 +60,14 @@ class client extends Client {
 // Export as default new client
 export default new client();
 ```
+
+# How to start process.
+* Make sure your have downloaded deno. 
+    * If no:
+        > (windows): choco install deno
+      
+        > (linux): curl -fsSL https://deno.land/x/install/install.sh | sh
+      
+* Start client process
+    > deno run --allow-net ./index.ts
+    * If you use ShardsManager, use `--allow-read` flag.
