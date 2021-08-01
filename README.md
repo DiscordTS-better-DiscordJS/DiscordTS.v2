@@ -1,8 +1,11 @@
 # DiscordTS.v2
-A deno library for interaction with Discord API, version 2.
+![Stars](https://img.shields.io/github/stars/DiscordTS-better-DiscordJS/DiscordTS.v2)
+![Licence](https://img.shields.io/github/license/DiscordTS-better-DiscordJS/DiscordTS.v2)
+___
+<p>A deno library for interaction with Discord API, version 2.</p>
 
-
-# Simple example
+___
+Simple example
 ```typescript
 // Import
 import { TOKEN } from '../token.ts';
