@@ -5,7 +5,7 @@ ___
 <p>A deno library for interaction with Discord API, version 2.</p>
 
 # Download
-→ [Link do Deno Land biblioteki](https//google.pl) ←
+→ [Link to Deno Land](https//google.pl) ←
 
 ___
 Simple import example
