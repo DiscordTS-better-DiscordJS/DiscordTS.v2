@@ -14,7 +14,7 @@ export interface argsOptions {
 
 export interface messageEdit {
     content: string
-    embedes: Embed[]
+    embed: Embed[]
     // flags
     // components: []
 }

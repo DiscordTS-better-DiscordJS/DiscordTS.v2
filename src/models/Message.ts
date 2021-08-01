@@ -44,8 +44,8 @@ export class Message {
         this.id = data.id;
         this.content = data.content;
         this.attachments = data.attachments;
-        this.createdTimestamp = new Date(data.timestamp).getTime();
-        this.createdAt = data.timestamp;
+        this.createdTimestamp = data.timestamp;
+        this.createdAt = new Date(data.timestamp);
         this.editedTimestamp = data.editedTimestamp;
         this.pinned = data.pinned;
         this.mentionEveryone = data.mentionEveryone;
@@ -87,6 +87,7 @@ export class Message {
     async edit (editData: messageEdit): Promise<boolean | any> {
 
         let d: any = editData;
+        if (editData.embed) d.embeds = [editData.embed];
 
         return api.message.modifyMessage(this.channelID, this.id, d);
 
@@ -144,6 +145,13 @@ export class Message {
         } else args = content.split(/ +/gmi);
         if (options?.includeCommandName) args = args.slice(1);
         return args;
+    }
+
+    /**
+     * Remove mentions from message content
+     */
+    get removeMentions (): string {
+        return this.content.replace(new RegExp(` +<[!@#]+[0-9]+>`, 'gmi'), '');
     }
 
 }
