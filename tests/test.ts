@@ -21,6 +21,19 @@ class bot extends Client {
 
         })
 
+        this.on('messageUpdate', async d => {
+
+            if (!d.oldMessage) return;
+
+            return d.newMessage.channel.send(new Embed({
+                fields: [
+                    { name: 'Przed edycją', value: d.oldMessage.content },
+                    { name: 'Po edycji', value: d.newMessage.content }
+                ]
+            }));
+
+        })
+
         this.connect(TOKEN);
 
     }
