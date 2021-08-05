@@ -9,6 +9,13 @@ import { DiscordTSError } from '../utils/DiscordTSError.ts';
 
 const channeltypes: any = CHANNEL_TYPES
 
+interface permissionOverwrites {
+    type?: number;
+    id?: string;
+    deny?: string;
+    allow?: string;
+}
+
 /**
  * Class representing Channel
  */
@@ -23,23 +30,27 @@ export class Channel {
     nsfw: boolean
     // permission_overwrtes:
     bitrare: number
-    icon: string
     parentID: string
     cooldown: number
+    lastMessage: string;
+    permissions: permissionOverwrites[]
 
     constructor (data: any) {
 
+        console.log(data);
+
         this.id = data.id;
         this.type = channeltypes[data.type];
-        this.guildID = data.guild_id;
+        this.guildID = data.guildID;
         this.position = data.position;
         this.name = data.name;
         this.topic = data.topic;
-        this.nsfw = data.nsfw;
-        this.bitrare = data.bitrare;
-        this.icon = data.icon;
+        this.nsfw = data.nsfw ? data.nsfw : null;
+        this.bitrare = data.bitrare ? data.bitrare : false;
         this.parentID = data.parent_id;
         this.cooldown = data.rate_limit_per_user;
+        this.lastMessage = data.last_message_id;
+        this.permissions = data.permission_overwrites;
 
 
     }
@@ -83,7 +94,9 @@ export class Channel {
     async delete (): Promise<boolean | Channel> {
        const guild = CACHE.guilds.get(this.guildID);
 
-        if (!guild.me.permissions.has('MANAGE_CHANNELS') || !guild.me.permissions.has('MANAGE_THREADS')) throw new DiscordTSError('deleteChannel', `Client require permission MANAGE_CHANNELS and MANAGE_THREADS to delete channel on guild ID ${this.guildID}`);
+       if (!guild) return false;
+
+       if (!guild.me.permissions.has('MANAGE_CHANNELS') || !guild.me.permissions.has('MANAGE_THREADS')) throw new DiscordTSError('deleteChannel', `Client require permission MANAGE_CHANNELS and MANAGE_THREADS to delete channel on guild ID ${this.guildID}`);
 
        const res = await api.channels.deleteChannel(this.id);
        if (!res) return this;
