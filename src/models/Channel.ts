@@ -31,7 +31,7 @@ export class Channel {
 
         this.id = data.id;
         this.type = channeltypes[data.type];
-        this.guildID = data.guildID;
+        this.guildID = data.guild_id;
         this.position = data.position;
         this.name = data.name;
         this.topic = data.topic;

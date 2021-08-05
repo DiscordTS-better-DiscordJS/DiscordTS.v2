@@ -41,6 +41,11 @@ class bot extends Client {
             }))
         });
 
+        this.on('channelCreate', async d => {
+            console.log(d);
+            d.send('co tworzysz kanal ' + d.name)
+        });
+
         this.connect(TOKEN);
 
     }

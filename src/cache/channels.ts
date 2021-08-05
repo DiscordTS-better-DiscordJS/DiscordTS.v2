@@ -1,6 +1,7 @@
 import { CacheBaseModel } from '../utils/CacheBaseModel.ts';
 import { Channel } from '../models/Channel.ts';
 import { DiscordTSError } from '../utils/DiscordTSError.ts';
+import { Collection } from '../models/Collection.ts';
 
 /**
  * Class representing Channels cache
@@ -24,6 +25,14 @@ export class Channels extends CacheBaseModel<string, any> {
         if (data?.id) return new Channel(data);
         else throw new DiscordTSError('channels cache', `No channel data in cache of id: ${id}`)
     }
+
+    addOne (guildID: string, apiChannel: any) {
+        const d = this.collection.get(guildID) || new Collection<string, any>();
+        d.set(apiChannel.id, apiChannel);
+        this.collection.set(guildID, d);
+        return true;
+    }
+
 
     /**
      * Check channel in cache
