@@ -32,7 +32,14 @@ class bot extends Client {
                 ]
             }));
 
-        })
+        });
+
+        this.on('messageDelete', async d => {
+            d.channel?.send(new Embed({
+                color: 0x00ff00,
+                description: `Jakiś rabuś wyjebał wiadomość.\n**Autor:** ${d.author.mention}\n**Wiadomość:** ${d.content}\n**Kiedy?:** ${new Date(d.createdTimestamp).toLocaleString()}\n**Id wiadomości:** [${d.id}](${d.url})`
+            }))
+        });
 
         this.connect(TOKEN);
 

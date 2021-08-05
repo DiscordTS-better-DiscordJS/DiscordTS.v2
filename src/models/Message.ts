@@ -7,7 +7,6 @@ import { Channel } from './Channel.ts';
 import { Member } from './Member.ts';
 import { User } from './User.ts';
 import { DiscordTSError } from "../utils/DiscordTSError.ts";
-import { Snowflake } from '../utils/ConvertSnwoflake.ts';
 
 /**
  * Message model
@@ -44,11 +43,11 @@ export class Message {
         this.id = data.id;
         this.content = data.content;
         this.attachments = data.attachments;
-        this.createdTimestamp = data.timestamp;
+        this.createdTimestamp = new Date(data.timestamp).getTime();
         this.createdAt = new Date(data.timestamp);
-        this.editedTimestamp = data.editedTimestamp;
+        this.editedTimestamp = data.editedTimestamp ? data.editedTimestamp : null;
         this.pinned = data.pinned;
-        this.mentionEveryone = data.mentionEveryone;
+        this.mentionEveryone = data.mentionEveryone ? true : false;
 
     }
 
@@ -78,6 +77,10 @@ export class Message {
      */
     get author (): User {
         return CACHE.users.get(this.authorID)
+    }
+
+    get url (): string {
+        return `https://discord.com/channels/${this.guildID}/${this.channelID}/${this.id}`
     }
 
     /**

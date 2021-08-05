@@ -59,6 +59,10 @@ export class User {
         return new Date(new Snowflake().decode(this.id).createdAt).getTime();
     }
 
+    get mention (): string {
+        return `<@!${this.id}>`;
+    }
+
     /**
      * Get User avatar with custom url options
      * @param {avatarURLOptions} options
