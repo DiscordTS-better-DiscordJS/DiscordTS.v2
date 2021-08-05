@@ -26,14 +26,6 @@ export class Channels extends CacheBaseModel<string, any> {
         else throw new DiscordTSError('channels cache', `No channel data in cache of id: ${id}`)
     }
 
-    addOne (guildID: string, apiChannel: any) {
-        const d = this.collection.get(guildID) || new Collection<string, any>();
-        d.set(apiChannel.id, apiChannel);
-        this.collection.set(guildID, d);
-        return true;
-    }
-
-
     /**
      * Check channel in cache
      * @param {string} id
