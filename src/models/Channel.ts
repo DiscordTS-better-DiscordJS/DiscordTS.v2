@@ -85,10 +85,9 @@ export class Channel {
     }
 
     /**
-     * @param {channelID} string 
+     * Delete this channel
      * @returns {Promise<boolean | Channel>}
      */
-
     async delete (): Promise<boolean | Channel> {
        const guild = CACHE.guilds.get(this.guildID);
 
@@ -128,7 +127,6 @@ export class Channel {
      * @returns {string} Mention of channel
      * @description Make channel mention from channel model
      */
-
     get mention (): string {
         return `<#${this.id}>`
     }
