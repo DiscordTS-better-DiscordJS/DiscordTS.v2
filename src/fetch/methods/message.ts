@@ -7,7 +7,6 @@ import { UpdateUtil } from './updateUtil.ts'
 export const modifyMessage = async (channelID: string, messageID: string, editData: any) => {
 
     const message = await CACHE.messages.fetchAPI(channelID, messageID);
-    console.log(message);
     if (!message.id) throw new DiscordTSError('modifyMessage', `Invalid message ${messageID}`);
 
     Object.keys(message).forEach(key => {

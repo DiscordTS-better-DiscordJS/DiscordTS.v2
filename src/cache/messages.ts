@@ -62,6 +62,24 @@ export class Messages extends CacheBaseModel<string, Collection<string, any>> {
     }
 
     /**
+     * Update message payload in cache
+     * @param {string} guildID
+     * @param {string} messageID
+     * @param {string} updateData
+     */
+    updateOnePayload (guildID: string, messageID: string, updateData: any): unknown | boolean {
+        const messages = this.collection.get(guildID);
+        if (!messages?.has(messageID)) return false;
+        else {
+            const targetMessage = messages.get(messageID);
+            Object.keys(updateData).forEach((k: any) => {
+                if (targetMessage[k]) targetMessage[k] = updateData[k];
+            });
+            return targetMessage;
+        }
+    }
+
+    /**
      * Update message in cache
      * @param {*} newData
      */

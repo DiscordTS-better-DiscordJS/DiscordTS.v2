@@ -23,6 +23,7 @@ export class Message {
     editedTimestamp: Date | null
     pinned: boolean
     mentionEveryone: boolean
+    deleted?: boolean
 
     private readonly guildID: string
     private readonly channelID: string
@@ -48,6 +49,7 @@ export class Message {
         this.editedTimestamp = data.editedTimestamp ? data.editedTimestamp : null;
         this.pinned = data.pinned;
         this.mentionEveryone = data.mentionEveryone ? true : false;
+        data.deleted ? this.deleted = true : null;
 
     }
 
@@ -79,6 +81,9 @@ export class Message {
         return CACHE.users.get(this.authorID)
     }
 
+    /**
+     * Get message url
+     */
     get url (): string {
         return `https://discord.com/channels/${this.guildID}/${this.channelID}/${this.id}`
     }

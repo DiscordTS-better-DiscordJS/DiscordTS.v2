@@ -7,6 +7,7 @@ export const _ = async (data: any) => {
 
     try {
         message = CACHE.messages.getOne(data.guild_id, data.id);
+        CACHE.messages.updateOnePayload(data.guild_id, data.id,{ deleted: true });
     } catch {
         message = undefined;
     }

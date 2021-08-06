@@ -37,8 +37,6 @@ export class Channel {
 
     constructor (data: any) {
 
-        console.log(data);
-
         this.id = data.id;
         this.type = channeltypes[data.type];
         this.guildID = data.guildID;
