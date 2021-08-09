@@ -26,8 +26,13 @@ class Cache {
     }
 }
 
+class Collectors {
+    public messages!: Collection<string, MessagesCollector<MessagesCollectorEvents>>
+}
+
 const OPTIONS = new Options();
 const CACHE = new Cache();
+const COLLECTORS = new Collectors();
 
 import { EventsEmitter } from '../utils/EventsEmitter.ts';
 import { WebSocketManager } from '../websocket/WebSocket.ts';
@@ -41,7 +46,9 @@ import { Users } from '../cache/users.ts';
 import { User } from './User.ts';
 import { Roles } from '../cache/roles.ts';
 import { Messages } from '../cache/messages.ts';
-import { version, DiscordTSError } from '../../mod.ts';
+import { MessagesCollector } from '../utils/Collectors/MessagesCollector.ts';
+import { MessagesCollectorEvents } from '../types/collectors/collectors.ts';
+import { version, DiscordTSError, Collection } from '../../mod.ts';
 
 /**
  * Class representing a Client.
@@ -71,6 +78,8 @@ class Client extends EventsEmitter<Events> {
         CACHE.users = new Users();
         CACHE.roles = new Roles();
         CACHE.messages = new Messages();
+
+        COLLECTORS.messages = new Collection();
 
         this.ready = false;
         this.ping = 0;
@@ -125,4 +134,4 @@ class Client extends EventsEmitter<Events> {
 
 }
 
-export { OPTIONS, Client, CACHE }
+export { OPTIONS, Client, CACHE, COLLECTORS }

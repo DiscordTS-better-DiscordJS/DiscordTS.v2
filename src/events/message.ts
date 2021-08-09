@@ -1,5 +1,5 @@
 import { Message } from '../models/Message.ts';
-import { CACHE } from  '../models/Client.ts';
+import { CACHE, COLLECTORS } from  '../models/Client.ts';
 import { api } from '../fetch/Api.ts';
 
 export const _ = async (data: any) => {
@@ -21,6 +21,14 @@ export const _ = async (data: any) => {
         }
 
         CACHE.messages.addOne(gID, data);
+
+        if (COLLECTORS.messages.has(message.channel.id)) {
+            COLLECTORS.messages.array.filter((collector => collector.channelID === message.channel.id))
+                .forEach(c => {
+                    if (c.comapreFilter(message)) c.emit('collect', message);
+                });
+        }
+
         return message;
     }
     return undefined;

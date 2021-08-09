@@ -4,7 +4,7 @@
  * @authors Mateusz#4711 & dejwidson#0001 & kacperrrooo#8907
  * @git https://github.com/DiscordTS-better-DiscordJS/DiscordTS.v2
  */
-export const version = 'Alpha-0.1.4';
+export const version = 'Alpha-0.2.0';
 
 export * from './src/websocket/WebSocket.ts';
 export * from './src/fetch/Api.ts';
@@ -30,7 +30,7 @@ export * from './src/types/models/message.ts';
 export * from './src/types/models/user.ts';
 export * from './src/types/fetch/updateUtil.ts';
 export * from './src/types/fetch/fetch.ts';
-// export * from './src/types/collectors/messagesCollector.ts';
+export * from './src/types/collectors/collectors.ts';
 
 export * from './src/types/permissions/permissions.ts';
 export * from './src/types/permissions/permissionsFlags.ts';
@@ -40,4 +40,4 @@ export * from './src/utils/BetterCommands.ts';
 export * from './src/utils/EventsEmitter.ts';
 export * from './src/utils/DiscordTSError.ts';
 export * from './src/utils/ConvertSnwoflake.ts';
-// export * from './src/utils/Collectors.ts';
+export * from './src/utils/Collectors/MessagesCollector.ts';

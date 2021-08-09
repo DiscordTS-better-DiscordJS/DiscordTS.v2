@@ -6,6 +6,8 @@ import { api } from '../fetch/Api.ts';
 import { Collection } from './Collection.ts';
 import { Message } from './Message.ts';
 import { DiscordTSError } from '../utils/DiscordTSError.ts';
+import { MessageCollectorOptions } from "../types/collectors/collectors.ts";
+import { MessagesCollector } from "../utils/Collectors/MessagesCollector.ts";
 
 const channeltypes: any = CHANNEL_TYPES
 
@@ -129,6 +131,14 @@ export class Channel {
      */
     get mention (): string {
         return `<#${this.id}>`
+    }
+
+    /**
+     * Create messages collector in this channel
+     * @param {MessageCollectorOptions} options
+     */
+    async createMessagesCollector (options: MessageCollectorOptions) {
+        return new MessagesCollector(options, this.id);
     }
 
 }

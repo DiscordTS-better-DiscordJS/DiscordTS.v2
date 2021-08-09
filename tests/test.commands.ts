@@ -106,6 +106,25 @@ class commands extends BetterCommands<cmd> {
             }
         }
 
+        this.add = {
+            name: 'kolektor',
+            command: {
+                run: async (m, args) => {
+
+                    const filter = (msg) => {
+                        return msg.author.id === m.author.id;
+                    }
+                    const collector = await m.channel.createMessagesCollector({ filter, messagesCount: 2 });
+
+                    collector.on('collect', message => {
+                        message.reply('Wo');
+                        await message.delete();
+                    })
+
+                }
+            }
+        }
+
     }
 }
 
