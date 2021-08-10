@@ -137,7 +137,7 @@ export class Channel {
      * Create messages collector in this channel
      * @param {MessageCollectorOptions} options
      */
-    async createMessagesCollector (options: MessageCollectorOptions): MessagesCollector<MessagesCollectorEvents> {
+    async createMessagesCollector (options: MessageCollectorOptions): Promise<MessagesCollector<MessagesCollectorEvents>> {
         return new MessagesCollector(options, this.id);
     }
 

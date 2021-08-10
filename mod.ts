@@ -1,10 +1,11 @@
+import { getFile } from './update/update.ts';
 /**
  * @name DiscordTS
  * @description Discord API Wrapper in TypeScript using deno.
  * @authors Mateusz#4711 & dejwidson#0001 & kacperrrooo#8907
  * @git https://github.com/DiscordTS-better-DiscordJS/DiscordTS.v2
  */
-export const version = 'Alpha-0.2.0';
+export const version = `Alpha-${getFile().version}`;
 
 export * from './src/websocket/WebSocket.ts';
 export * from './src/fetch/Api.ts';
